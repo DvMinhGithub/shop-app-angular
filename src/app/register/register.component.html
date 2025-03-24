@@ -1,0 +1,56 @@
+<div class="flex justify-center items-center w-full h-full text-white p-6 rounded-lg shadow-md">
+    <form class="bg-gray-800 md:w-[480px]">
+        <h2 class="text-center text-2xl font-bold mb-4">Đăng ký</h2>
+
+        <div class="mb-4">
+            <label for="email" class="block mb-2 text-sm">Email/Phone</label>
+            <input type="text" id="email"
+                class="w-full px-4 py-2 border rounded-md focus:border-purple-500 focus:outline-none">
+
+            <span class="absolute right-3 top-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 cursor-pointer">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17l-4 4m0 0l-4-4" />
+                </svg>
+            </span>
+        </div>
+
+        <div class="mb-4">
+            <label for="password" class="block mb-2 text-sm">Mật khẩu</label>
+            <input type="password" id="password"
+                class="w-full px-4 py-2 border rounded-md focus:border-purple-500 focus:outline-none">
+        </div>
+
+        <div class="mb-4">
+            <label for="confirm-password" class="block mb-2 text-sm">Gõ lại mật khẩu</label>
+            <input type="password" id="confirm-password"
+                class="w-full px-4 py-2 border rounded-md focus:border-purple-500 focus:outline-none">
+
+        </div>
+
+        <div class="mb-4">
+            <label for="full-name" class="block mb-2 text-sm">Họ và tên</label>
+            <input type="text" id="full-name"
+                class="w-full px-4 py-2 border rounded-md focus:border-purple-500 focus:outline-none">
+        </div>
+
+        <div class="mb-4">
+            <label for="address" class="block mb-2 text-sm">Địa chỉ</label>
+            <input type="text" id="address"
+                class="w-full px-4 py-2 border rounded-md focus:border-purple-500 focus:outline-none">
+        </div>
+
+        <div class="flex items-center mb-4">
+            <input type="checkbox" id="agreement" class="mr-2">
+            <label for="agreement" class="text-sm">Tôi đồng ý với các điều khoản và điều kiện</label>
+        </div>
+
+        <button
+            class="w-full px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors duration-300">
+            Đăng ký
+        </button>
+
+        <p class="mt-4 text-sm text-center">
+            Bạn đã có tài khoản? <a href="#" class="text-purple-500 hover:text-purple-600">Đăng nhập</a>
+        </p>
+    </form>
+</div>

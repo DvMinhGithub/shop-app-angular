@@ -1,0 +1,56 @@
+<header class="bg-gray-900 shadow-md">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-8">
+            <div class="flex items-center space-x-2">
+                <img src="https://via.placeholder.com/40" alt="Logo" class="w-10 h-10 rounded-full">
+                <h1 class="text-xl font-bold text-white">Thương Hiệu</h1>
+            </div>
+
+            <nav class="hidden lg:flex space-x-4 text-gray-600">
+                <a *ngFor="let item of menuItems" [routerLink]="item.link" routerLinkActive="active-link"
+                    class="text-gray-300 hover:bg-purple-500 hover:text-white py-2 px-4 rounded-full">
+                    {{ item.label }}
+                </a>
+            </nav>
+        </div>
+
+        <div class="hidden lg:flex space-x-4">
+            <button
+                class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-300">
+                Đăng Nhập
+            </button>
+            <button
+                class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-300">
+                Đăng Ký
+            </button>
+        </div>
+
+        <button class="lg:hidden text-gray-600 hover:text-blue-500 focus:outline-none" (click)="toggleMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </div>
+
+    <div *ngIf="isMenuOpen" class="fixed inset-0 bg-black bg-opacity-50 z-40" (click)="toggleMenu()"></div>
+    <nav [class.menu-open]="isMenuOpen"
+        class="lg:hidden fixed w-full overflow-hidden transition-all duration-300 ease-in-out h-0 z-50">
+        <div class="px-4 py-4 bg-gray-900">
+            <a *ngFor="let item of menuItems" [routerLink]="item.link" routerLinkActive="active-link"
+                class="block px-4 py-2 transition-colors duration-300 text-gray-300 hover:text-white hover:bg-purple-500">
+                {{ item.label }}
+            </a>
+            <div class="mt-4 space-y-2">
+                <button
+                    class="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-300">
+                    Đăng Nhập
+                </button>
+                <button
+                    class="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-300">
+                    Đăng Ký
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
