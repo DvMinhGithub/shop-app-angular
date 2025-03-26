@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 .no-scroll {
-    position: fixed;
-    overflow-y: scroll;
-    touch-action: none;
+  position: fixed;
+  overflow-y: scroll;
+  touch-action: none;
 }

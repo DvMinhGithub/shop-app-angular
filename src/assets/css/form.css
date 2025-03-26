@@ -15,6 +15,10 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
 textarea,
 select {
   @apply w-full px-4 py-2 border border-gray-300 bg-transparent rounded-md text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all duration-300;
@@ -50,6 +54,10 @@ button[type="submit"] {
 }
 
 /* Error Messages */
-.error {
-  @apply text-red-500 text-sm mt-[-10px] mb-4;
+.error-message {
+  @apply text-red-500 text-sm mt-2.5 mb-4;
+}
+
+.input-error {
+  @apply !border-red-500;
 }
