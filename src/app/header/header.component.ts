@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
   isMenuOpen: boolean = false;
@@ -13,7 +13,7 @@ export class HeaderComponent {
     { label: 'Trang Chủ', link: '/' },
     { label: 'Giới Thiệu', link: '/about' },
     { label: 'Dịch Vụ', link: '/services' },
-    { label: 'Liên Hệ', link: '/contact' }
+    { label: 'Liên Hệ', link: '/contact' },
   ];
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;

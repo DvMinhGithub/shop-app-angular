@@ -1,78 +1,98 @@
 <div class="container mx-auto px-4 py-8">
-    <h1 class="mb-4 text-white text-2xl font-bold text-center lg:mb-10">Đây là trang Order</h1>
+  <h1 class="mb-4 text-white text-2xl font-bold text-center lg:mb-10">
+    Đây là trang Order
+  </h1>
 
-    <div class="flex flex-col gap-4 lg:flex-row lg:gap-10">
-        <div class="w-full lg:w-1/2">
-            <h2 class="text-lg font-bold text-purple-500 max-lg:text-center">Thông tin người nhận</h2>
-            <form class="mt-4">
-                <label for="name" class="block mb-2 text-gray-300">Họ và tên</label>
-                <input type="text" id="name" class="w-full p-2 border rounded-md">
+  <div class="flex flex-col gap-4 lg:flex-row lg:gap-10">
+    <div class="w-full lg:w-1/2">
+      <h2 class="text-lg font-bold text-purple-500 max-lg:text-center">
+        Thông tin người nhận
+      </h2>
+      <form class="mt-4">
+        <label for="name" class="block mb-2 text-gray-300">Họ và tên</label>
+        <input type="text" id="name" class="w-full p-2 border rounded-md" />
 
-                <label for="email" class="block mb-2 mt-4 text-gray-300">Email</label>
-                <input type="email" id="email" class="w-full p-2 border rounded-md">
+        <label for="email" class="block mb-2 mt-4 text-gray-300">Email</label>
+        <input type="email" id="email" class="w-full p-2 border rounded-md" />
 
-                <label for="phone" class="block mb-2 mt-4 text-gray-300">Số điện thoại</label>
-                <input type="tel" id="phone" class="w-full p-2 border rounded-md">
-            </form>
-        </div>
-
-        <div class="w-full">
-            <div>
-                <h2 class="text-lg font-bold text-green-500">Sản phẩm đã đặt hàng</h2>
-                <div class="overflow-auto">
-                    <table class="w-full mt-4 text-white">
-                        <thead>
-                            <tr>
-                                <th class="px-4 py-2">Sản phẩm</th>
-                                <th class="px-4 py-2">Số lượng</th>
-                                <th class="px-4 py-2">Đơn giá</th>
-                                <th class="px-4 py-2">Tổng giá</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="p-4">
-                                    <div class="flex gap-4">
-                                        <img src="../../assets/images/product.png" alt="Product Image"
-                                            class="aspect-1 w-24 rounded-md">
-                                        <p class="px-4 py-2">Tên sản phẩm</p>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-2">2</td>
-                                <td class="px-4 py-2">100,000 ₫</td>
-                                <td class="px-4 py-2">200,000 ₫</td>
-                            </tr>
-                            <tr>
-                                <td class="p-4">
-                                    <div class="flex gap-4">
-                                        <img src="../../assets/images/product.png" alt="Product Image"
-                                            class="aspect-1 w-24 rounded-md">
-                                        <p class="px-4 py-2">Tên sản phẩm</p>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-2">2</td>
-                                <td class="px-4 py-2">100,000 ₫</td>
-                                <td class="px-4 py-2">200,000 ₫</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p class="mt-4 text-xl text-right font-bold">Tổng giá: 350,000 ₫</p>
-            </div>
-
-            <div class="mt-8">
-                <h2 class="text-lg font-bold text-purple-500">Nhập coupon</h2>
-                <div class="flex gap-2 mt-2 max-md:flex-col">
-                    <input type="text" placeholder="Nhập mã coupon" class="w-full p-2 border rounded-md">
-                    <button
-                        class="flex-1 min-w-fit bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors duration-300 max-lg:w-full">Áp
-                        dụng</button>
-                </div>
-            </div>
-
-            <button
-                class="bg-purple-500 text-white mt-4 rounded-md hover:bg-purple-600 transition-colors duration-300 max-lg:w-full">Đặt
-                hàng</button>
-        </div>
+        <label for="phone" class="block mb-2 mt-4 text-gray-300"
+          >Số điện thoại</label
+        >
+        <input type="tel" id="phone" class="w-full p-2 border rounded-md" />
+      </form>
     </div>
+
+    <div class="w-full">
+      <div>
+        <h2 class="text-lg font-bold text-green-500">Sản phẩm đã đặt hàng</h2>
+        <div class="overflow-auto">
+          <table class="w-full mt-4 text-white">
+            <thead>
+              <tr>
+                <th class="px-4 py-2">Sản phẩm</th>
+                <th class="px-4 py-2">Số lượng</th>
+                <th class="px-4 py-2">Đơn giá</th>
+                <th class="px-4 py-2">Tổng giá</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-4">
+                  <div class="flex gap-4">
+                    <img
+                      src="../../assets/images/product.png"
+                      alt="Product Image"
+                      class="aspect-1 w-24 rounded-md"
+                    />
+                    <p class="px-4 py-2">Tên sản phẩm</p>
+                  </div>
+                </td>
+                <td class="px-4 py-2">2</td>
+                <td class="px-4 py-2">100,000 ₫</td>
+                <td class="px-4 py-2">200,000 ₫</td>
+              </tr>
+              <tr>
+                <td class="p-4">
+                  <div class="flex gap-4">
+                    <img
+                      src="../../assets/images/product.png"
+                      alt="Product Image"
+                      class="aspect-1 w-24 rounded-md"
+                    />
+                    <p class="px-4 py-2">Tên sản phẩm</p>
+                  </div>
+                </td>
+                <td class="px-4 py-2">2</td>
+                <td class="px-4 py-2">100,000 ₫</td>
+                <td class="px-4 py-2">200,000 ₫</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-xl text-right font-bold">Tổng giá: 350,000 ₫</p>
+      </div>
+
+      <div class="mt-8">
+        <h2 class="text-lg font-bold text-purple-500">Nhập coupon</h2>
+        <div class="flex gap-2 mt-2 max-md:flex-col">
+          <input
+            type="text"
+            placeholder="Nhập mã coupon"
+            class="w-full p-2 border rounded-md"
+          />
+          <button
+            class="flex-1 min-w-fit bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors duration-300 max-lg:w-full"
+          >
+            Áp dụng
+          </button>
+        </div>
+      </div>
+
+      <button
+        class="bg-purple-500 text-white mt-4 rounded-md hover:bg-purple-600 transition-colors duration-300 max-lg:w-full"
+      >
+        Đặt hàng
+      </button>
+    </div>
+  </div>
 </div>

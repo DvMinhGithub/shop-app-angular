@@ -1,11 +1,11 @@
 .active-link {
-    @apply bg-purple-500 text-white;
+  @apply bg-purple-500 text-white;
 }
 
 nav {
-    @apply max-md:h-0 overflow-hidden transition-all duration-300 ease-in-out;
+  @apply max-md:h-0 overflow-hidden transition-all duration-300 ease-in-out;
 }
 
 nav.menu-open {
-    @apply h-[300px];
+  @apply h-[300px];
 }
