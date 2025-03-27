@@ -1,17 +1,18 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { RouterModule } from '@angular/router';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { OrderComponent } from './order/order.component';
-import { OrderConfirmComponent } from './order-confirm/order-confirm.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { HomeComponent } from './home/home.component'
+import { HeaderComponent } from './header/header.component'
+import { FooterComponent } from './footer/footer.component'
+import { RouterModule } from '@angular/router'
+import { ProductDetailComponent } from './product-detail/product-detail.component'
+import { OrderComponent } from './order/order.component'
+import { OrderConfirmComponent } from './order-confirm/order-confirm.component'
+import { RegisterComponent } from './register/register.component'
+import { LoginComponent } from './login/login.component'
+import { CarouselModule } from 'ngx-owl-carousel-o'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -30,9 +31,11 @@ import { FormsModule } from '@angular/forms';
     RouterModule.forRoot([]),
     CarouselModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
-  bootstrap: [RegisterComponent]
+  bootstrap: [LoginComponent]
 })
-export class AppModule { }
+export class AppModule {}

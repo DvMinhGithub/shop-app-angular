@@ -1,44 +1,49 @@
-<div class="conttainer flex justify-center items-center w-full h-full  text-white p-6 rounded-lg shadow-md">
-
-    <form class="bg-gray-800 md:w-[480px]">
-        <h2 class="text-center text-2xl font-bold mb-4">Đăng nhập</h2>
-
-        <div class="mb-4">
-            <label for="email" class="block mb-2 text-sm">Email/Phone</label>
-            <input type="text" id="email"
-                class="w-full px-4 py-2 border rounded-md focus:border-purple-500 focus:outline-none">
-        </div>
-
-        <div class="mb-4 relative">
-            <label for="password" class="block mb-2 text-sm">Mật khẩu</label>
-            <input type="password" id="password"
-                class="w-full px-4 py-2 border rounded-md focus:border-purple-500 focus:outline-none">
-
-            <span class="absolute right-3 top-3">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 cursor-pointer">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17l-4 4m0 0l-4-4" />
-                </svg>
-            </span>
-        </div>
-
-        <div class="flex justify-between items-center mb-4">
-
-            <div class="flex items-center">
-                <input type="checkbox" id="remember-me" class="mr-2">
-                <label for="remember-me" class="text-sm">Ghi nhớ đăng nhập</label>
-            </div>
-
-            <a href="#" class="text-purple-500 hover:text-purple-600">Quên mật
-                khẩu</a>
-        </div>
-
-        <button
-            class="w-full px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors duration-300">
-            Đăng nhập
-        </button>
-
-        <p class="mt-4 text-sm text-center">
-            Bạn chưa có tài khoản? <a href="#" class="text-purple-500 hover:text-purple-600">Tạo tài khoản</a>
-        </p>
-    </form>
+<div class="conttainer flex justify-center items-center w-full h-full text-white p-6 rounded-lg shadow-md">
+  <form class="bg-gray-800 md:w-[480px]" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h2 class="text-center text-2xl font-bold mb-4">Đăng nhập</h2>
+    <div class="mb-4">
+      <label for="phoneNumber" class="block mb-2 text-sm">Số điện thoại</label>
+      <input
+        type="text"
+        id="phoneNumber"
+        formControlName="phoneNumber"
+        [class.input-error]="loginForm.get('phoneNumber')?.invalid && loginForm.get('phoneNumber')?.touched"
+        class="w-full px-4 py-2 border rounded-md focus:border-purple-500 focus:outline-none"
+      />
+      <div *ngIf="loginForm.get('phoneNumber')?.invalid && loginForm.get('phoneNumber')?.touched" class="error-message">
+        <span *ngIf="loginForm.get('phoneNumber')?.errors?.['required']">Số điện thoại là bắt buộc.</span>
+        <span *ngIf="loginForm.get('phoneNumber')?.errors?.['minlength']">Số điện thoại không hợp lệ</span>
+      </div>
+    </div>
+    <div class="mb-4 relative">
+      <label for="password" class="block mb-2 text-sm">Mật khẩu</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        [class.input-error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        class="w-full px-4 py-2 border rounded-md focus:border-purple-500 focus:outline-none"
+      />
+      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+        <span *ngIf="loginForm.get('password')?.errors?.['required']">Mật khẩu là bắt buộc.</span>
+        <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Mật khẩu phải có ít nhất 6 ký tự.</span>
+      </div>
+    </div>
+    <div class="flex justify-between items-center mb-4">
+      <div class="flex items-center">
+        <input type="checkbox" id="remember-me" class="mr-2" />
+        <label for="remember-me" class="text-sm">Ghi nhớ đăng nhập</label>
+      </div>
+      <a href="#" class="text-purple-500 hover:text-purple-600">Quên mật khẩu</a>
+    </div>
+    <button
+      class="w-full px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors duration-300"
+    >
+      Đăng nhập
+    </button>
+    <p class="mt-4 text-sm text-center">
+      Bạn chưa có tài khoản?
+      <a href="#" class="text-purple-500 hover:text-purple-600">Tạo tài khoản</a>
+    </p>
+  </form>
 </div>
