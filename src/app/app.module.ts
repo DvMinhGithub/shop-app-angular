@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { HomeComponent } from './home/home.component'
-import { HeaderComponent } from './header/header.component'
-import { FooterComponent } from './footer/footer.component'
+import { HomeComponent } from './pages/home/home.component'
+import { HeaderComponent } from './components/header/header.component'
+import { FooterComponent } from './components/footer/footer.component'
 import { RouterModule } from '@angular/router'
-import { ProductDetailComponent } from './product-detail/product-detail.component'
-import { OrderComponent } from './order/order.component'
-import { OrderConfirmComponent } from './order-confirm/order-confirm.component'
-import { RegisterComponent } from './register/register.component'
-import { LoginComponent } from './login/login.component'
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component'
+import { OrderComponent } from './pages/order/order.component'
+import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.component'
+import { RegisterComponent } from './pages/register/register.component'
 import { CarouselModule } from 'ngx-owl-carousel-o'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
+import { LoginComponent } from './pages/login/login.component'
 
 @NgModule({
   declarations: [
@@ -36,6 +36,6 @@ import { HttpClientModule } from '@angular/common/http'
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [LoginComponent]
+  bootstrap: [HomeComponent]
 })
 export class AppModule {}

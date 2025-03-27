@@ -1,12 +1,12 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { UserService } from '../services/user.service'
-import { ILoginRequest, ILoginResponse } from '../types/user'
-import { IApiResponse } from '../types/response'
-import { TokenService } from '../services/token.service'
-import { RoleService } from '../services/role.service'
-import { IRole } from '../types/role'
+import { RoleService } from 'src/app/services/role.service'
+import { TokenService } from 'src/app/services/token.service'
+import { UserService } from 'src/app/services/user.service'
+import { IApiResponse } from 'src/app/types/response'
+import { IRole } from 'src/app/types/role'
+import { ILoginRequest, ILoginResponse } from 'src/app/types/user'
 
 @Component({
   selector: 'app-login',
@@ -36,7 +36,7 @@ export class LoginComponent {
       next: (res: IApiResponse<IRole[]>) => {
         this.roles = res.result
       },
-      error: (error) => {
+      error: (error: Error) => {
         console.error('There was an error!', error)
       }
     })
