@@ -16,7 +16,13 @@ export const headersApi = (refreshToken?: string): HttpHeaders => {
 
   return headers;
 };
+
 export const userApi = {
   register: `${Url}/users/register`,
   login: `${Url}/users/login`,
+};
+
+
+export const roleApi = {
+  getRoles: `${Url}/roles`,
 };

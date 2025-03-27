@@ -1,4 +1,4 @@
-<div class="conttainer flex justify-center items-center w-full h-full text-white p-6 rounded-lg shadow-md">
+<div class="conttainer flex justify-center items-center h-full text-white p-6 rounded-lg shadow-md">
   <form class="bg-gray-800 md:w-[480px]" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h2 class="text-center text-2xl font-bold mb-4">Đăng nhập</h2>
     <div class="mb-4">
@@ -8,7 +8,7 @@
         id="phoneNumber"
         formControlName="phoneNumber"
         [class.input-error]="loginForm.get('phoneNumber')?.invalid && loginForm.get('phoneNumber')?.touched"
-        class="w-full px-4 py-2 border rounded-md focus:border-purple-500 focus:outline-none"
+        class="focus:border-purple-500 focus:outline-none"
       />
       <div *ngIf="loginForm.get('phoneNumber')?.invalid && loginForm.get('phoneNumber')?.touched" class="error-message">
         <span *ngIf="loginForm.get('phoneNumber')?.errors?.['required']">Số điện thoại là bắt buộc.</span>
@@ -22,13 +22,30 @@
         id="password"
         formControlName="password"
         [class.input-error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
-        class="w-full px-4 py-2 border rounded-md focus:border-purple-500 focus:outline-none"
+        class="focus:border-purple-500 focus:outline-none"
       />
       <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
         <span *ngIf="loginForm.get('password')?.errors?.['required']">Mật khẩu là bắt buộc.</span>
         <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Mật khẩu phải có ít nhất 6 ký tự.</span>
       </div>
     </div>
+    <!-- option for select role -->
+    <div class="mb-4">
+      <label for="roleId" class="block mb-2 text-sm">Vai trò</label>
+      <select
+        id="roleId"
+        formControlName="roleId"
+        [class.input-error]="loginForm.get('roleId')?.invalid && loginForm.get('roleId')?.touched"
+        class="focus:border-purple-500 focus:outline-none"
+      >
+        <option [ngValue]="null" disabled selected>Chọn vai trò</option>
+        <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+      </select>
+      <div *ngIf="loginForm.get('roleId')?.invalid && loginForm.get('roleId')?.touched" class="error-message">
+        <span *ngIf="loginForm.get('roleId')?.errors?.['required']">Vai trò là bắt buộc.</span>
+      </div>
+    </div>
+
     <div class="flex justify-between items-center mb-4">
       <div class="flex items-center">
         <input type="checkbox" id="remember-me" class="mr-2" />
@@ -37,7 +54,7 @@
       <a href="#" class="text-purple-500 hover:text-purple-600">Quên mật khẩu</a>
     </div>
     <button
-      class="w-full px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors duration-300"
+      class="px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors duration-300"
     >
       Đăng nhập
     </button>
