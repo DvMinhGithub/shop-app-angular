@@ -1,0 +1,41 @@
+<div class="flex flex-wrap items-center justify-center gap-1 sm:gap-2">
+  <button
+    (click)="goToFirst()"
+    [disabled]="currentPage === 1"
+    [class.btn-active]="currentPage === 1"
+  >
+    &laquo;
+  </button>
+
+  <button
+    (click)="goToPrev()"
+    [disabled]="currentPage === 1"
+  >
+    &lsaquo;
+  </button>
+
+  <ng-container *ngFor="let page of pages">
+    <button
+      (click)="goToPage(page)"
+      [class.btn]="page !== currentPage"
+      [class.btn-active]="page === currentPage"
+    >
+      {{ page }}
+    </button>
+  </ng-container>
+
+  <button
+    (click)="goToNext()"
+    [disabled]="currentPage === totalPages"
+  >
+    &rsaquo;
+  </button>
+
+  <button
+    (click)="goToLast()"
+    [disabled]="currentPage === totalPages"
+    [class.btn-active]="currentPage === totalPages"
+  >
+    &raquo;
+  </button>
+</div>

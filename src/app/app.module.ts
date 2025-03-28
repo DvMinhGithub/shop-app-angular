@@ -12,7 +12,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
-import { LoginComponent } from './pages/login/login.component'
+import { LoginComponent } from './pages/login/login.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { PaginationComponent } from './components/pagination/pagination.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { LoginComponent } from './pages/login/login.component'
     OrderComponent,
     OrderConfirmComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ProductCardComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
