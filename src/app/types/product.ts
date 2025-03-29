@@ -3,12 +3,9 @@ export interface IProduct {
   updatedAt: string;
   name: string;
   description: string;
-  price: number; // Giá hiện tại
-  originalPrice?: number; // Giá gốc (nếu có)
-  warranty?: number; // Thời gian bảo hành (tháng)
+  price: number;
   thumbnail: string[];
   categoryId: number;
-
 }
 
 export interface IListProductsRequest {

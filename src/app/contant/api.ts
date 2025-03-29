@@ -1,5 +1,4 @@
 import { HttpHeaders } from '@angular/common/http'
-import { IPagination } from '../types/request'
 import { IListProductsRequest } from '../types/product'
 
 export const Url = 'http://localhost:8080/api/v1'

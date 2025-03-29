@@ -13,6 +13,6 @@ export class RoleService {
   constructor(private http: HttpClient) {}
 
   getRoles(): Observable<IApiResponse<IRole[]>> {
-    return this.http.get<IApiResponse<any>>(roleApi.getRoles);
+    return this.http.get<IApiResponse<IRole[]>>(roleApi.getRoles);
   }
 }

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  isMenuOpen: boolean = false;
+  isMenuOpen = false;
 
   // Danh sách menu
   menuItems = [

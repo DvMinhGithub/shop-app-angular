@@ -1,11 +1,15 @@
-.active-link {
-  @apply bg-purple-500 text-white;
+.active-nav-link {
+  @apply text-white font-medium;
 }
-
-nav {
-  @apply max-md:h-0 overflow-hidden transition-all duration-300 ease-in-out;
+.active-nav-link span {
+  @apply w-4/5 left-[10%] right-[10%];
 }
-
-nav.menu-open {
-  @apply h-[300px];
+.active-mobile-nav-link {
+  @apply text-white bg-gray-700;
+}
+.active-mobile-nav-link span {
+  @apply bg-purple-500;
+}
+nav.open {
+  transform: translateX(0);
 }

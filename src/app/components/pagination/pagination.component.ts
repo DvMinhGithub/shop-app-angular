@@ -7,9 +7,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 
 export class PaginationComponent {
-  @Input() currentPage: number = 1;
-  @Input() totalPages: number = 1;
-  @Input() maxVisiblePages: number = 5;
+  @Input() currentPage = 1;
+  @Input() totalPages = 1;
+  @Input() maxVisiblePages = 5;
   
   @Output() pageChange = new EventEmitter<number>();
 
@@ -17,7 +17,7 @@ export class PaginationComponent {
     const pages = [];
     const half = Math.floor(this.maxVisiblePages / 2);
     let start = Math.max(1, this.currentPage - half);
-    let end = Math.min(this.totalPages, start + this.maxVisiblePages - 1);
+    const end = Math.min(this.totalPages, start + this.maxVisiblePages - 1);
 
     if (end - start + 1 < this.maxVisiblePages) {
       start = Math.max(1, end - this.maxVisiblePages + 1);

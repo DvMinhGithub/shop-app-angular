@@ -3,7 +3,6 @@ import { CategoryService } from 'src/app/services/category.service'
 import { ProductService } from 'src/app/services/product.service'
 import { ICategory } from 'src/app/types/category'
 import { IListProductsRequest, IProduct, IProductListResponse } from 'src/app/types/product'
-import { IPagination } from 'src/app/types/request'
 import { IApiResponse } from 'src/app/types/response'
 
 @Component({
@@ -14,7 +13,7 @@ import { IApiResponse } from 'src/app/types/response'
 export class HomeComponent implements OnInit {
   products: IProduct[] = [];
   categories: ICategory[] = [];
-  totalPages: number = 0;
+  totalPages = 0;
   searchProduct: IListProductsRequest = {
     keyword: '',
     categoryId: 0,

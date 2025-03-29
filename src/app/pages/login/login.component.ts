@@ -1,12 +1,13 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { RoleService } from 'src/app/services/role.service'
-import { TokenService } from 'src/app/services/token.service'
+import { finalize } from 'rxjs/operators'
 import { UserService } from 'src/app/services/user.service'
+import { TokenService } from 'src/app/services/token.service'
 import { IApiResponse } from 'src/app/types/response'
-import { IRole } from 'src/app/types/role'
 import { ILoginRequest, ILoginResponse } from 'src/app/types/user'
+
+type ValidationMessages = Record<string, Record<string, string>>;
 
 @Component({
   selector: 'app-login',
@@ -15,58 +16,84 @@ import { ILoginRequest, ILoginResponse } from 'src/app/types/user'
 })
 export class LoginComponent {
   loginForm: FormGroup
-  roles: IRole[] = []
+  showPassword = false
+  isLoading = false
+  errorMessage: string | null = null
+
+  validationMessages: ValidationMessages = {
+    phoneNumber: {
+      required: 'Số điện thoại là bắt buộc',
+      minlength: 'Số điện thoại phải có ít nhất 10 số',
+      pattern: 'Số điện thoại không hợp lệ'
+    },
+    password: {
+      required: 'Mật khẩu là bắt buộc',
+      minlength: 'Mật khẩu phải có ít nhất 6 ký tự'
+    }
+  }
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private tokenService: TokenService,
-    private rolesService: RoleService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      phoneNumber: ['', [Validators.required, Validators.minLength(6)]],
+      phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[0-9]*$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      roleId: [null, [Validators.required] ]
+      rememberMe: [false]
     })
   }
 
-  ngOnInit(): void {
-    this.rolesService.getRoles().subscribe({
-      next: (res: IApiResponse<IRole[]>) => {
-        this.roles = res.result
-      },
-      error: (error: Error) => {
-        console.error('There was an error!', error)
-      }
-    })
-  }
+  onSubmit(): void {
+    this.errorMessage = null
 
-  onSubmit() {
-    console.log('Form submitted:', this.loginForm)
+    if (this.loginForm.invalid) {
+      this.markFormGroupTouched(this.loginForm)
+      return
+    }
 
-    if (this.loginForm.valid) {
-      const user: ILoginRequest = this.loginForm.value
-      this.userService.login(user).subscribe({
+    this.isLoading = true
+    const credentials: ILoginRequest = this.loginForm.value
+
+    this.userService
+      .login(credentials)
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe({
         next: (res: IApiResponse<ILoginResponse>) => {
-          const { token } = res.result
-          this.tokenService.setToken(token)
-          // this.router.navigate(['/'])
+          this.tokenService.setToken(res.result.token)
+          this.router.navigate(['/'])
         },
-        error: (error: Error) => {
-          console.error('There was an error!', error)
+        error: (error) => {
+          console.error('Login error:', error)
+          this.errorMessage = error.error?.message || 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.'
         }
       })
-    } else {
-      this.markFormGroupTouched(this.loginForm)
-    }
   }
 
-  private markFormGroupTouched(formGroup: FormGroup) {
+  getValidationMessage(controlName: string): string {
+    const control = this.loginForm.get(controlName)
+    if (control?.errors && control.touched) {
+      for (const error in control.errors) {
+        if (control.errors && Object.hasOwn(control.errors, error)) {
+          const messages = this.validationMessages[controlName as keyof typeof this.validationMessages]
+          return messages[error as keyof typeof messages] || ''
+        }
+      }
+    }
+    return ''
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword
+  }
+
+  private markFormGroupTouched(formGroup: FormGroup): void {
     Object.values(formGroup.controls).forEach((control) => {
       control.markAsTouched()
-      if ((control as any).controls) {
-        this.markFormGroupTouched(control as FormGroup)
+
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control)
       }
     })
   }

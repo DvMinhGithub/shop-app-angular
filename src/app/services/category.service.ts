@@ -1,11 +1,9 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { categoryApi, productApi } from '../contant/api'
-import { IApiResponse } from '../types/response'
-import { IPagination } from '../types/request'
-import { IProductListResponse } from '../types/product'
+import { categoryApi } from '../contant/api'
 import { ICategory } from '../types/category'
+import { IApiResponse } from '../types/response'
 
 @Injectable({
   providedIn: 'root'

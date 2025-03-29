@@ -6,8 +6,6 @@ import { Injectable } from '@angular/core'
 export class TokenService {
   private readonly ACCESS_TOKEN_KEY = 'access_token'
 
-  constructor() {}
-
   getToken(): string | null {
     return localStorage.getItem(this.ACCESS_TOKEN_KEY)
   }

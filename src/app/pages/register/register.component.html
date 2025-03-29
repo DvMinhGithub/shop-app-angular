@@ -1,116 +1,143 @@
-<div class="flex justify-center items-center w-full h-full text-white p-6 rounded-lg shadow-md">
-  <form class="bg-gray-800 md:w-[480px]" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <h2 class="text-center text-2xl font-bold mb-4">Đăng ký</h2>
-
-    <div class="mb-4">
-      <label for="phone" class="block mb-2 text-sm">Số điện thoại</label>
-      <input
-        type="text"
-        id="phone"
-        formControlName="phoneNumber"
-        [class.input-error]="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched"
-        class="focus:border-purple-500 focus:outline-none"
-      />
-      <div *ngIf="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched" class="error-message">
-        <span *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Số điện thoại là bắt buộc.</span>
-        <span *ngIf="registerForm.get('phoneNumber')?.errors?.['minlength']">Số điện thoại phải có ít nhất 6 ký tự.</span>
+<div class="min-h-screen flex items-center justify-center bg-gray-900 p-4">
+  <div class="w-full max-w-md">
+    <form class="bg-gray-800 rounded-xl shadow-2xl p-8" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="text-center mb-8">
+        <div
+          class="mx-auto w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mb-4"
+        >
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
+            ></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-white">Đăng ký tài khoản</h2>
+        <p class="text-gray-400 mt-1">Tạo tài khoản để bắt đầu trải nghiệm</p>
       </div>
-    </div>
 
-    <div class="mb-4">
-      <label for="password" class="block mb-2 text-sm">Mật khẩu</label>
-      <input
-        type="password"
-        id="password"
-        formControlName="password"
-        [class.input-error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
-        class="focus:border-purple-500 focus:outline-none"
-      />
-      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
-        <span *ngIf="registerForm.get('password')?.errors?.['required']">Mật khẩu là bắt buộc.</span>
-        <span *ngIf="registerForm.get('password')?.errors?.['minlength']">Mật khẩu phải có ít nhất 6 ký tự.</span>
+      <div *ngIf="errorMessage" class="mb-4 p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-500 text-sm">
+        {{ errorMessage }}
       </div>
-    </div>
 
-    <div class="mb-4">
-      <label for="confirm-password" class="block mb-2 text-sm">Nhập lại mật khẩu</label>
-      <input
-        type="password"
-        id="confirm-password"
-        formControlName="retypedPassword"
-        [class.input-error]="registerForm.get('retypedPassword')?.invalid && registerForm.get('retypedPassword')?.touched"
-        class="focus:border-purple-500 focus:outline-none"
-      />
-      <div *ngIf="registerForm.get('retypedPassword')?.invalid && registerForm.get('retypedPassword')?.touched" class="error-message">
-        <span *ngIf="registerForm.get('retypedPassword')?.errors?.['required']">Nhập lại mật khẩu là bắt buộc.</span>
-        <span *ngIf="registerForm.get('retypedPassword')?.errors?.['mustMatch']">Mật khẩu không khớp.</span>
+      <div class="mb-4">
+        <label for="phone" class="block text-sm font-medium text-gray-300 mb-2">Số điện thoại</label>
+        <input
+          type="text"
+          id="phone"
+          formControlName="phoneNumber"
+          placeholder="Nhập số điện thoại"
+          [class.border-red-500]="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched"
+        />
+        <div class="mt-1 text-sm text-red-400">
+          {{ getValidationMessage('phoneNumber') }}
+        </div>
       </div>
-    </div>
 
-    <div class="mb-4">
-      <label for="full-name" class="block mb-2 text-sm">Họ và tên</label>
-      <input
-        type="text"
-        id="full-name"
-        formControlName="fullName"
-        [class.input-error]="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched"
-        class="focus:border-purple-500 focus:outline-none"
-      />
-      <div *ngIf="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched" class="error-message">
-        <span *ngIf="registerForm.get('fullName')?.errors?.['required']">Họ và tên là bắt buộc.</span>
-        <span *ngIf="registerForm.get('fullName')?.errors?.['minlength']">Họ và tên phải có ít nhất 6 ký tự.</span>
+      <div class="mb-4">
+        <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Mật khẩu</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Nhập mật khẩu"
+          [class.border-red-500]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+        />
+        <div class="mt-1 text-sm text-red-400">
+          {{ getValidationMessage('password') }}
+        </div>
       </div>
-    </div>
 
-    <div class="mb-4">
-      <label for="date-of-birth" class="block mb-2 text-sm">Ngày sinh</label>
-      <input
-        type="date"
-        id="date-of-birth"
-        formControlName="dateOfBirth"
-        [class.input-error]="registerForm.get('dateOfBirth')?.invalid && registerForm.get('dateOfBirth')?.touched"
-        (change)="validateAge()"
-        class="focus:border-purple-500 focus:outline-none"
-      />
-      <div *ngIf="registerForm.get('dateOfBirth')?.invalid && registerForm.get('dateOfBirth')?.touched" class="error-message">
-        <span *ngIf="registerForm.get('dateOfBirth')?.errors?.['required']">Ngày sinh là bắt buộc.</span>
-        <span *ngIf="registerForm.get('dateOfBirth')?.errors?.['invalidAge']">Bạn phải đủ 18 tuổi trở lên.</span>
+      <div class="mb-4">
+        <label for="confirm-password" class="block text-sm font-medium text-gray-300 mb-2">Nhập lại mật khẩu</label>
+        <input
+          type="password"
+          id="confirm-password"
+          formControlName="retypedPassword"
+          placeholder="Nhập lại mật khẩu"
+          [class.border-red-500]="
+            registerForm.get('retypedPassword')?.invalid && registerForm.get('retypedPassword')?.touched
+          "
+        />
+        <div class="mt-1 text-sm text-red-400">
+          {{ getValidationMessage('retypedPassword') }}
+        </div>
       </div>
-    </div>
 
-    <div class="mb-4">
-      <label for="address" class="block mb-2 text-sm">Địa chỉ</label>
-      <input
-        type="text"
-        id="address"
-        [class.input-error]="registerForm.get('address')?.invalid && registerForm.get('address')?.touched"
-        formControlName="address"
-        class="focus:border-purple-500 focus:outline-none"
-      />
-      <div *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched" class="error-message">
-        <span *ngIf="registerForm.get('address')?.errors?.['required']">Địa chỉ là bắt buộc.</span>
-        <span *ngIf="registerForm.get('address')?.errors?.['minlength']">Địa chỉ phải có ít nhất 6 ký tự.</span>
+      <div class="mb-4">
+        <label for="full-name" class="block text-sm font-medium text-gray-300 mb-2">Họ và tên</label>
+        <input
+          type="text"
+          id="full-name"
+          formControlName="fullName"
+          placeholder="Nhập họ và tên"
+          [class.border-red-500]="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched"
+        />
+        <div class="mt-1 text-sm text-red-400">
+          {{ getValidationMessage('fullName') }}
+        </div>
       </div>
-    </div>
 
-    <div class="flex items-center mb-4">
-      <input type="checkbox" id="agreement" formControlName="agreeTerms" class="mr-2" />
-      <label for="agreement" class="text-sm">Tôi đồng ý với các điều khoản và điều kiện</label>
-    </div>
-    <div *ngIf="registerForm.get('agreeTerms')?.invalid && registerForm.get('agreeTerms')?.touched" class="error-message">
-      <span *ngIf="registerForm.get('agreeTerms')?.errors?.['required']">Bạn phải đồng ý với các điều khoản và điều kiện.</span>
-    </div>
+      <div class="mb-4">
+        <label for="date-of-birth" class="block text-sm font-medium text-gray-300 mb-2">Ngày sinh</label>
+        <input
+          type="date"
+          id="date-of-birth"
+          formControlName="dateOfBirth"
+          [max]="today"
+          [class.border-red-500]="registerForm.get('dateOfBirth')?.invalid && registerForm.get('dateOfBirth')?.touched"
+        />
+        <div class="mt-1 text-sm text-red-400">
+          {{ getValidationMessage('dateOfBirth') }}
+        </div>
+      </div>
 
-    <button
-      type="submit"
-      class="w-full bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors duration-300"
-    >
-      Đăng ký
-    </button>
+      <div class="mb-4">
+        <label for="address" class="block text-sm font-medium text-gray-300 mb-2">Địa chỉ</label>
+        <input
+          type="text"
+          id="address"
+          formControlName="address"
+          placeholder="Nhập địa chỉ"
+          [class.border-red-500]="registerForm.get('address')?.invalid && registerForm.get('address')?.touched"
+        />
+        <div class="mt-1 text-sm text-red-400">
+          {{ getValidationMessage('address') }}
+        </div>
+      </div>
 
-    <p class="mt-4 text-sm text-center">
-      Bạn đã có tài khoản?
-      <a href="#" class="text-purple-500 hover:text-purple-600">Đăng nhập</a>
-    </p>
-  </form>
+      <div class="mb-6">
+        <div class="flex items-start">
+          <input
+            type="checkbox"
+            id="agreement"
+            formControlName="agreeTerms"
+            class="mt-1 h-4 w-4 text-purple-500 focus:ring-purple-500 border-gray-600 rounded bg-gray-700"
+          />
+          <label for="agreement" class="ml-2 block text-sm text-gray-300">
+            Tôi đồng ý với các <a href="#" class="text-purple-400 hover:text-purple-300">điều khoản và điều kiện</a>
+          </label>
+        </div>
+        <div class="mt-1 text-sm text-red-400">
+          {{ getValidationMessage('agreeTerms') }}
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full py-3 px-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-medium rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50"
+        [disabled]="registerForm.invalid || isLoading"
+      >
+        <span *ngIf="!isLoading">Đăng ký</span>
+        <span *ngIf="isLoading">Đang xử lý...</span>
+      </button>
+
+      <div class="mt-6 text-center text-sm text-gray-400">
+        Bạn đã có tài khoản?
+        <a routerLink="/login" class="font-medium text-purple-400 hover:text-purple-300 ml-1"> Đăng nhập </a>
+      </div>
+    </form>
+  </div>
 </div>
