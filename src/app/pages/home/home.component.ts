@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
+import { CategoryService } from 'src/app/services/category.service'
 import { ProductService } from 'src/app/services/product.service'
-import { IProduct, IProductListResponse } from 'src/app/types/product'
+import { ICategory } from 'src/app/types/category'
+import { IListProductsRequest, IProduct, IProductListResponse } from 'src/app/types/product'
 import { IPagination } from 'src/app/types/request'
 import { IApiResponse } from 'src/app/types/response'
 
@@ -11,20 +13,25 @@ import { IApiResponse } from 'src/app/types/response'
 })
 export class HomeComponent implements OnInit {
   products: IProduct[] = [];
+  categories: ICategory[] = [];
   totalPages: number = 0;
-  pagination: IPagination = {
+  searchProduct: IListProductsRequest = {
+    keyword: '',
+    categoryId: 0,
     page: 1,
-    limit: 10
+    limit: 12
   };
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private categoryService: CategoryService
+  ) {}
 
   ngOnInit(): void {
     this.loadProducts();
+    this.loadCategories();
   }
 
   loadProducts(): void {
-    this.productService.getProducts(this.pagination).subscribe({
+    this.productService.getProducts(this.searchProduct).subscribe({
       next: (res: IApiResponse<IProductListResponse>) => {
         this.products = res.result.products;
         this.totalPages = res.result.totalPages;
@@ -35,8 +42,20 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  loadCategories(): void {
+    this.categoryService.getCategories().subscribe({
+      next: (res: IApiResponse<ICategory[]>) => {
+        console.log(res);
+        this.categories = res.result;
+      },
+      error: (error: Error) => {
+        console.error('There was an error!', error);
+      }
+    });
+  }
+
   onPageChange(page: number): void {
-    this.pagination.page = page;
+    this.searchProduct.page = page;
     this.loadProducts();
     window.scrollTo(0, 0);
   }

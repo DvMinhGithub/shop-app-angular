@@ -11,6 +11,13 @@ export interface IProduct {
 
 }
 
+export interface IListProductsRequest {
+  keyword?: string;
+  categoryId?: number;
+  page: number;
+  limit: number;
+}
+
 export interface IProductListResponse {
   products: IProduct[]
   totalPages: number

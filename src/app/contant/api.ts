@@ -1,5 +1,6 @@
 import { HttpHeaders } from '@angular/common/http'
 import { IPagination } from '../types/request'
+import { IListProductsRequest } from '../types/product'
 
 export const Url = 'http://localhost:8080/api/v1'
 
@@ -28,6 +29,11 @@ export const roleApi = {
 }
 
 export const productApi = {
-  getProducts: (pagination: IPagination) => `${Url}/products?limit=${pagination.limit}&page=${pagination.page}`,
+  getProducts: (request: IListProductsRequest) => `${Url}/products?keyword=${request.keyword}&categoryId=${request.categoryId}&page=${request.page}&limit=${request.limit}`,
   getProduct: (id: string): string => `${Url}/products/${id}`
+}
+
+
+export const categoryApi = {
+  getCategories: `${Url}/categories`
 }
