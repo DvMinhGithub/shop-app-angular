@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core'
-import { CategoryService } from 'src/app/services/category.service'
-import { ProductService } from 'src/app/services/product.service'
-import { ICategory } from 'src/app/types/category'
-import { IListProductsRequest, IProduct, IProductListResponse } from 'src/app/types/product'
-import { IApiResponse } from 'src/app/types/response'
+import { Component, OnInit } from '@angular/core';
+import { CategoryService } from 'src/app/services/category.service';
+import { ProductService } from 'src/app/services/product.service';
+import { ICategory } from 'src/app/types/category';
+import { IListProductsRequest, IProduct, IProductListResponse } from 'src/app/types/product';
+import { IApiResponse } from 'src/app/types/response';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +21,14 @@ export class HomeComponent implements OnInit {
     limit: 12
   };
 
-  constructor(private productService: ProductService, private categoryService: CategoryService
+  // Thêm trạng thái loading
+  isLoadingProducts = true;
+  isLoadingCategories = true;
+  isInitialLoad = true;
+
+  constructor(
+    private productService: ProductService, 
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -30,25 +37,34 @@ export class HomeComponent implements OnInit {
   }
 
   loadProducts(): void {
+    this.isLoadingProducts = true;
+    
     this.productService.getProducts(this.searchProduct).subscribe({
       next: (res: IApiResponse<IProductListResponse>) => {
         this.products = res.result.products;
         this.totalPages = res.result.totalPages;
+        this.isLoadingProducts = false;
+        this.isInitialLoad = false;
       },
       error: (error: Error) => {
         console.error('There was an error!', error);
+        this.isLoadingProducts = false;
+        this.isInitialLoad = false;
       }
     });
   }
 
   loadCategories(): void {
+    this.isLoadingCategories = true;
+    
     this.categoryService.getCategories().subscribe({
       next: (res: IApiResponse<ICategory[]>) => {
-        console.log(res);
         this.categories = res.result;
+        this.isLoadingCategories = false;
       },
       error: (error: Error) => {
         console.error('There was an error!', error);
+        this.isLoadingCategories = false;
       }
     });
   }
@@ -57,5 +73,10 @@ export class HomeComponent implements OnInit {
     this.searchProduct.page = page;
     this.loadProducts();
     window.scrollTo(0, 0);
+  }
+
+  // Helper method để kiểm tra trạng thái loading tổng thể
+  get isLoading(): boolean {
+    return this.isLoadingProducts || (this.isInitialLoad && this.products.length === 0);
   }
 }

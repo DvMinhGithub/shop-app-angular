@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IProduct } from 'src/app/types/product';
+import { getProductImage } from 'src/app/utils/product';
 
 @Component({
   selector: 'app-product-card',
@@ -7,5 +8,9 @@ import { IProduct } from 'src/app/types/product';
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent {
-  @Input() product!: IProduct;;
+  @Input() product!: IProduct;
+
+  get image(): string {
+    return getProductImage(this.product);
+  }
 }

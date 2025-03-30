@@ -2,7 +2,7 @@
   <div class="container mx-auto px-4">
     <div class="flex flex-col lg:flex-row gap-8">
       <div class="w-full lg:w-1/2">
-        <owl-carousel-o
+        <owl-carousel-o *ngIf="product.thumbnail.length > 0 else noImage"
           [options]="carouselOptions"
           (changed)="updateActiveSlide($event.startPosition!)"
           #mainCarousel
@@ -15,19 +15,26 @@
           </ng-template>
         </owl-carousel-o>
 
-        <owl-carousel-o [options]="thumbnailOptions" class="block mt-4" #thumbnailCarousel>
+        <ng-template #noImage>
+          <div class="aspect-w-3 aspect-h-2 bg-gray-800 rounded-md"></div>
+        </ng-template>
+
+        <owl-carousel-o [options]="thumbnailOptions" class="block mt-4" #thumbnailCarousel *ngIf="product.thumbnail.length > 1">
           <ng-template carouselSlide *ngFor="let image of product.thumbnail; let i = index">
             <div
               class="cursor-pointer m-1 p-1 rounded-md transition-all duration-200"
               [ngClass]="{ 'ring-2 ring-blue-500': activeSlideIndex === i }"
               (click)="mainCarousel.to(i.toString())"
+              (keydown.enter)="mainCarousel.to(i.toString())"
+              (keydown.space)="mainCarousel.to(i.toString())"
+              tabindex="0"
             >
               <img
                 [src]="image"
                 [alt]="product.name + ' - Thumbnail ' + (i + 1)"
                 class="object-cover w-full h-20 rounded-md"
               />
-            </div>
+          </div>
           </ng-template>
         </owl-carousel-o>
       </div>
