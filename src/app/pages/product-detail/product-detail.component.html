@@ -1,8 +1,41 @@
 <div class="bg-gray-900 text-gray-100 min-h-screen py-8">
   <div class="container mx-auto px-4">
-    <div class="flex flex-col lg:flex-row gap-8">
+    <div *ngIf="!product" class="animate-pulse">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="w-full lg:w-1/2">
+          <div class="aspect-w-3 aspect-h-2 bg-gray-800 rounded-xl"></div>
+          <div class="flex gap-2 mt-4">
+            <div class="w-1/4 h-20 bg-gray-800 rounded-md"></div>
+            <div class="w-1/4 h-20 bg-gray-800 rounded-md"></div>
+            <div class="w-1/4 h-20 bg-gray-800 rounded-md"></div>
+            <div class="w-1/4 h-20 bg-gray-800 rounded-md"></div>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-1/2">
+          <div class="h-8 bg-gray-800 rounded w-3/4 mb-4"></div>
+          <div class="h-10 bg-gray-800 rounded w-1/2 mb-6"></div>
+
+          <div class="space-y-4 mb-6">
+            <div class="h-4 bg-gray-800 rounded w-full"></div>
+            <div class="h-4 bg-gray-800 rounded w-5/6"></div>
+            <div class="h-4 bg-gray-800 rounded w-2/3"></div>
+          </div>
+
+          <div class="h-12 bg-gray-800 rounded w-32 mb-8"></div>
+
+          <div class="flex gap-4">
+            <div class="h-12 bg-gray-800 rounded-lg w-1/2"></div>
+            <div class="h-12 bg-gray-800 rounded-lg w-1/2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="product" class="flex flex-col lg:flex-row gap-8">
       <div class="w-full lg:w-1/2">
-        <owl-carousel-o *ngIf="product.thumbnail.length > 0 else noImage"
+        <owl-carousel-o
+          *ngIf="product.thumbnail.length > 0; else noImage"
           [options]="carouselOptions"
           (changed)="updateActiveSlide($event.startPosition!)"
           #mainCarousel
@@ -10,7 +43,11 @@
         >
           <ng-template carouselSlide *ngFor="let image of product.thumbnail; let i = index" [id]="i.toString()">
             <div class="aspect-w-3 aspect-h-2 bg-gray-800">
-              <img [src]="image" [alt]="product.name + ' - Ảnh ' + (i + 1)" class="object-cover w-full h-full rounded-md" />
+              <img
+                [src]="image"
+                [alt]="product.name + ' - Ảnh ' + (i + 1)"
+                class="object-cover w-full h-full rounded-md"
+              />
             </div>
           </ng-template>
         </owl-carousel-o>
@@ -19,22 +56,26 @@
           <div class="aspect-w-3 aspect-h-2 bg-gray-800 rounded-md"></div>
         </ng-template>
 
-        <owl-carousel-o [options]="thumbnailOptions" class="block mt-4" #thumbnailCarousel *ngIf="product.thumbnail.length > 1">
+        <owl-carousel-o
+          [options]="thumbnailOptions"
+          class="block mt-4"
+          #thumbnailCarousel
+          *ngIf="product.thumbnail.length > 1"
+        >
           <ng-template carouselSlide *ngFor="let image of product.thumbnail; let i = index">
             <div
               class="cursor-pointer m-1 p-1 rounded-md transition-all duration-200"
               [ngClass]="{ 'ring-2 ring-blue-500': activeSlideIndex === i }"
               (click)="mainCarousel.to(i.toString())"
-              (keydown.enter)="mainCarousel.to(i.toString())"
-              (keydown.space)="mainCarousel.to(i.toString())"
+              (keyup.enter)="mainCarousel.to(i.toString())"
               tabindex="0"
             >
               <img
                 [src]="image"
                 [alt]="product.name + ' - Thumbnail ' + (i + 1)"
-                class="object-cover w-full h-20 rounded-md"
+                class="object-cover w-full aspect-1 rounded-md"
               />
-          </div>
+            </div>
           </ng-template>
         </owl-carousel-o>
       </div>
@@ -58,7 +99,7 @@
           <div class="flex items-center gap-2">
             <button
               (click)="decreaseQuantity()"
-              class="w-10 h-10  rounded-l-md flex items-center justify-center hover:bg-gray-600 transition-colors"
+              class="w-10 h-10 rounded-l-md flex items-center justify-center hover:bg-gray-600 transition-colors"
               [disabled]="quantity <= 1"
               [ngClass]="{ 'opacity-50 cursor-not-allowed': quantity <= 1 }"
             >

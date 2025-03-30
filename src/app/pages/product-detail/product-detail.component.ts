@@ -1,31 +1,20 @@
-import { Component, ViewChild } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { CarouselComponent, OwlOptions } from 'ngx-owl-carousel-o'
+import { ProductService } from 'src/app/services/product.service'
 import { IProduct } from 'src/app/types/product'
+import { IApiResponse } from 'src/app/types/response'
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnInit {
   @ViewChild('mainCarousel') mainCarousel!: CarouselComponent
   @ViewChild('thumbnailCarousel') thumbnailCarousel!: CarouselComponent
 
-  product: IProduct = {
-    name: 'iPhone 14 Pro Max',
-    description: 'Điện thoại thông minh cao cấp của Apple với màn hình Dynamic Island và camera 48MP',
-    price: 29990000,
-    thumbnail: [
-      '../../assets/images/product.png',
-      '../../assets/images/product.png',
-      '../../assets/images/product.png',
-      '../../assets/images/product.png',
-      '../../assets/images/product.png'
-    ],
-    categoryId: 1,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  }
+  product!: IProduct
+  isLoading = true  
 
   quantity = 1
   activeSlideIndex = 0
@@ -59,6 +48,30 @@ export class ProductDetailComponent {
       1000: { items: 5 }
     },
     margin: 8
+  }
+
+  constructor (private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.loadProductDetail()
+  }
+
+  loadProductDetail(): void {
+    const productId = 1
+    if (!productId) {
+      console.error('Product ID is not found')
+      return
+    }
+    this.productService.getProductDetail(productId).subscribe({
+      next: (res: IApiResponse<IProduct>) => {
+        this.product = res.result
+        this.isLoading = false
+      },
+      error: (err) => {
+        console.error(err)
+        this.isLoading = false
+      }
+    })
   }
 
   updateActiveSlide(index: number): void {

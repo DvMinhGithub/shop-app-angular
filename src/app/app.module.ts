@@ -42,6 +42,6 @@ import { ProductCardSkeletonComponent } from './components/product-card-skeleton
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [HomeComponent]
+  bootstrap: [ProductDetailComponent]
 })
 export class AppModule {}
