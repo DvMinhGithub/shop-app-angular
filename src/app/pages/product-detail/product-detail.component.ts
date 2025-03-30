@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { CarouselComponent, OwlOptions } from 'ngx-owl-carousel-o'
+import { CartService } from 'src/app/services/cart.service'
 import { ProductService } from 'src/app/services/product.service'
 import { IProduct } from 'src/app/types/product'
 import { IApiResponse } from 'src/app/types/response'
@@ -14,7 +15,7 @@ export class ProductDetailComponent implements OnInit {
   @ViewChild('thumbnailCarousel') thumbnailCarousel!: CarouselComponent
 
   product!: IProduct
-  isLoading = true  
+  isLoading = true
 
   quantity = 1
   activeSlideIndex = 0
@@ -50,7 +51,7 @@ export class ProductDetailComponent implements OnInit {
     margin: 8
   }
 
-  constructor (private productService: ProductService) {}
+  constructor(private productService: ProductService, private cartService: CartService) {}
 
   ngOnInit(): void {
     this.loadProductDetail()
@@ -79,7 +80,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   increaseQuantity(): void {
-      this.quantity++
+    this.quantity++
   }
 
   decreaseQuantity(): void {
@@ -89,11 +90,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(): void {
-    console.log('Added to cart:', {
-      product: this.product.name,
-      quantity: this.quantity,
-      price: this.product.price
-    })
+    this.cartService.addToCart(this.product.id, this.quantity)
   }
 
   buyNow(): void {
