@@ -14,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
 import { LoginComponent } from './pages/login/login.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
-import { PaginationComponent } from './components/pagination/pagination.component'
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { ProductCardSkeletonComponent } from './components/product-card-skeleton/product-card-skeleton.component'
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     RegisterComponent,
     LoginComponent,
     ProductCardComponent,
-    PaginationComponent
+    PaginationComponent,
+    ProductCardSkeletonComponent
   ],
   imports: [
     BrowserModule,
