@@ -27,9 +27,6 @@ export class PaginationComponent {
       pages.push(i);
     }
 
-    console.log(pages);
-    
-
     return pages;
   }
 
@@ -37,8 +34,6 @@ export class PaginationComponent {
     if (page >= 1 && page <= this.totalPages && page !== this.currentPage) {
       this.pageChange.emit(page);
     }
-    console.log(this.currentPage);
-    
   }
 
   goToFirst(): void {
