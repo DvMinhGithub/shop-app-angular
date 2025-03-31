@@ -1,3 +1,5 @@
+import { IProductOrder } from './product'
+
 export interface IOrderItem {
   id: number
   name: string
@@ -6,7 +8,7 @@ export interface IOrderItem {
   quantity: number
 }
 
-export interface IOrderDetails {
+export interface IOrder {
   orderId: string
   orderDate: Date
   items: IOrderItem[]
@@ -17,9 +19,34 @@ export interface IOrderDetails {
   paymentMethod: string
 }
 
+export interface IOrderDetails {
+  id: number
+  product: IProductOrder
+  price: number
+  quantity: number
+  totalMoney: number
+}
+
 export interface ICartItem {
   productId: number
   quantity: number
+}
+
+export interface IOrderResponse {
+  id: number
+  userId: string
+  fullName: string
+  email: string
+  phoneNumber: string
+  address: string
+  note: string
+  orderDate: Date
+  totalMoney: number
+  shippingMethod: string
+  shippingAddress: string
+  paymentMethod: string
+  status: string
+  orderDetails: IOrderDetails[]
 }
 
 export interface IOrderCreateRequest {

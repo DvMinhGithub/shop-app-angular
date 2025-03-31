@@ -39,5 +39,11 @@ export const categoryApi = {
 }
 
 export const orderApi = {
-  createOrder: `${Url}/orders`
+  createOrder: `${Url}/orders`,
+  getOrder: (orderId: number): string => `${Url}/orders/${orderId}`
+}
+
+export const orderDetailApi = {
+  createOrderDetail: `${Url}/order-details`,
+  getOrderDetail: (orderId: number): string => `${Url}/order-details/${orderId}`
 }
