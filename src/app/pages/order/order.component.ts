@@ -103,5 +103,6 @@ export class OrderComponent implements OnInit {
 
   removeItem(itemId: number): void {
     this.orderItems = this.orderItems.filter((item) => item.id !== itemId)
+    this.cartService.removeProduct(itemId)
   }
 }
