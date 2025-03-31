@@ -123,115 +123,125 @@
             <i class="fas fa-shopping-cart mr-2"></i> Đơn hàng của bạn
           </h2>
 
-          <div class="overflow-x-auto">
-            <table class="w-full text-white">
-              <thead class="border-b border-gray-700">
-                <tr>
-                  <th class="px-4 py-3 text-center">Sản phẩm</th>
-                  <th class="px-4 py-3 text-center">Số lượng</th>
-                  <th class="px-4 py-3 text-center">Đơn giá</th>
-                  <th class="px-4 py-3 text-center">Tổng</th>
-                  <th class="px-4 py-3"></th>
-                </tr>
-              </thead>
-              <tbody *ngIf="isLoading; else loadedContent">
-                <tr *ngFor="let item of [1]" class="border-b border-gray-700">
-                  <td class="px-4 py-3">
-                    <div class="flex items-center gap-4 max-md:flex-col max-md:w-max">
-                      <div class="w-16 h-16 bg-gray-700 rounded-md animate-pulse"></div>
-                      <div class="h-4 bg-gray-700 rounded w-24 animate-pulse"></div>
-                    </div>
-                  </td>
-                  <td class="px-4 py-3 text-center">
-                    <div class="w-16 h-8 bg-gray-700 rounded mx-auto animate-pulse"></div>
-                  </td>
-                  <td class="px-4 py-3 text-right">
-                    <div class="h-4 bg-gray-700 rounded w-20 ml-auto animate-pulse"></div>
-                  </td>
-                  <td class="px-4 py-3 text-right">
-                    <div class="h-4 bg-gray-700 rounded w-20 ml-auto animate-pulse"></div>
-                  </td>
-                  <td class="px-4 py-3 text-center">
-                    <div class="w-6 h-6 bg-gray-700 rounded-full mx-auto animate-pulse"></div>
-                  </td>
-                </tr>
-              </tbody>
-
-              <ng-template #loadedContent>
-                <tbody>
-                  <tr *ngFor="let item of orderItems" class="border-b border-gray-700 hover:bg-gray-700/50">
+          <div *ngIf="orderItems && orderItems.length > 0; else emptyCart">
+            <div class="overflow-x-auto">
+              <table class="w-full text-white">
+                <thead class="border-b border-gray-700">
+                  <tr>
+                    <th class="px-4 py-3 text-center">Sản phẩm</th>
+                    <th class="px-4 py-3 text-center">Số lượng</th>
+                    <th class="px-4 py-3 text-center">Đơn giá</th>
+                    <th class="px-4 py-3 text-center">Tổng</th>
+                    <th class="px-4 py-3"></th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="isLoading; else loadedContent">
+                  <tr *ngFor="let item of [1]" class="border-b border-gray-700">
                     <td class="px-4 py-3">
                       <div class="flex items-center gap-4 max-md:flex-col max-md:w-max">
-                        <img [src]="item.image" [alt]="item.name" class="w-16 h-16 object-cover rounded-md" />
-                        <span>{{ item.name }}</span>
+                        <div class="w-16 h-16 bg-gray-700 rounded-md animate-pulse"></div>
+                        <div class="h-4 bg-gray-700 rounded w-24 animate-pulse"></div>
                       </div>
                     </td>
                     <td class="px-4 py-3 text-center">
-                      <input
-                        type="number"
-                        [(ngModel)]="item.quantity"
-                        (change)="updateQuantity(item, item.quantity)"
-                        min="1"
-                        class="!w-16 p-1 bg-gray-700 border border-gray-600 rounded text-center"
-                      />
+                      <div class="w-16 h-8 bg-gray-700 rounded mx-auto animate-pulse"></div>
                     </td>
-                    <td class="px-4 py-3 text-right">{{ item.price | currency : 'VND' : 'symbol' : '1.0-0' }}</td>
                     <td class="px-4 py-3 text-right">
-                      {{ item.price * item.quantity | currency : 'VND' : 'symbol' : '1.0-0' }}
+                      <div class="h-4 bg-gray-700 rounded w-20 ml-auto animate-pulse"></div>
+                    </td>
+                    <td class="px-4 py-3 text-right">
+                      <div class="h-4 bg-gray-700 rounded w-20 ml-auto animate-pulse"></div>
                     </td>
                     <td class="px-4 py-3 text-center">
-                      <button (click)="removeItem(item.id)" class="text-red-400 hover:text-red-300 transition-colors">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
+                      <div class="w-6 h-6 bg-gray-700 rounded-full mx-auto animate-pulse"></div>
                     </td>
                   </tr>
                 </tbody>
-              </ng-template>
-            </table>
-          </div>
 
-          <div class="mt-6 p-4 bg-gray-700 rounded-lg">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-gray-300">Tạm tính:</span>
-              <span class="font-medium">{{ totalPrice | currency : 'VND' : 'symbol' : '1.0-0' }}</span>
+                <ng-template #loadedContent>
+                  <tbody>
+                    <tr *ngFor="let item of orderItems" class="border-b border-gray-700 hover:bg-gray-700/50">
+                      <td class="px-4 py-3">
+                        <div class="flex items-center gap-4 max-md:flex-col max-md:w-max">
+                          <img [src]="item.image" [alt]="item.name" class="w-16 h-16 object-cover rounded-md" />
+                          <span>{{ item.name }}</span>
+                        </div>
+                      </td>
+                      <td class="px-4 py-3 text-center">
+                        <input
+                          type="number"
+                          [(ngModel)]="item.quantity"
+                          (change)="updateQuantity(item, item.quantity)"
+                          min="1"
+                          class="!w-16 p-1 bg-gray-700 border border-gray-600 rounded text-center"
+                        />
+                      </td>
+                      <td class="px-4 py-3 text-right">{{ item.price | currency : 'VND' : 'symbol' : '1.0-0' }}</td>
+                      <td class="px-4 py-3 text-right">
+                        {{ item.price * item.quantity | currency : 'VND' : 'symbol' : '1.0-0' }}
+                      </td>
+                      <td class="px-4 py-3 text-center">
+                        <button (click)="removeItem(item.id)" class="text-red-400 hover:text-red-300 transition-colors">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </ng-template>
+              </table>
             </div>
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-gray-300">Giảm giá:</span>
-              <span class="font-medium text-green-400">-0 ₫</span>
-            </div>
-            <div class="flex justify-between items-center pt-4 border-t border-gray-600">
-              <span class="text-lg font-bold">Tổng cộng:</span>
-              <span class="text-xl font-bold text-purple-400">{{
-                totalPrice | currency : 'VND' : 'symbol' : '1.0-0'
-              }}</span>
-            </div>
-          </div>
 
-          <div class="mt-6">
-            <h3 class="text-lg font-bold text-purple-400 mb-2"><i class="fas fa-tag mr-2"></i> Mã giảm giá</h3>
-            <div class="flex gap-2">
-              <input
-                type="text"
-                [(ngModel)]="couponCode"
-                placeholder="Nhập mã giảm giá"
-                class="flex-1 p-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-              />
-              <button
-                (click)="applyCoupon()"
-                class="px-6 py-3 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
-              >
-                Áp dụng
-              </button>
+            <div class="mt-6 p-4 bg-gray-700 rounded-lg">
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-gray-300">Tạm tính:</span>
+                <span class="font-medium">{{ totalPrice | currency : 'VND' : 'symbol' : '1.0-0' }}</span>
+              </div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-gray-300">Giảm giá:</span>
+                <span class="font-medium text-green-400">-0 ₫</span>
+              </div>
+              <div class="flex justify-between items-center pt-4 border-t border-gray-600">
+                <span class="text-lg font-bold">Tổng cộng:</span>
+                <span class="text-xl font-bold text-purple-400">{{
+                  totalPrice | currency : 'VND' : 'symbol' : '1.0-0'
+                }}</span>
+              </div>
             </div>
-          </div>
 
-          <button
-            (click)="submitOrder()"
-            [disabled]="orderForm.invalid || orderItems.length === 0"
-            class="w-full mt-6 py-3 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <i class="fas fa-credit-card mr-2"></i> ĐẶT HÀNG NGAY
-          </button>
+            <div class="mt-6">
+              <h3 class="text-lg font-bold text-purple-400 mb-2"><i class="fas fa-tag mr-2"></i> Mã giảm giá</h3>
+              <div class="flex gap-2">
+                <input
+                  type="text"
+                  [(ngModel)]="couponCode"
+                  placeholder="Nhập mã giảm giá"
+                  class="flex-1 p-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                />
+                <button
+                  (click)="applyCoupon()"
+                  class="px-6 py-3 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                >
+                  Áp dụng
+                </button>
+              </div>
+            </div>
+
+            <button
+              (click)="submitOrder()"
+              [disabled]="orderForm.invalid || orderItems.length === 0"
+              class="w-full mt-6 py-3 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <i class="fas fa-credit-card mr-2"></i> ĐẶT HÀNG NGAY
+            </button>
+          </div>
+          <ng-template #emptyCart>
+            <div class="p-6 bg-gray-800 rounded-lg shadow-md text-center">
+              <h2 class="text-xl font-bold text-red-400 mb-4">
+                <i class="fas fa-shopping-cart mr-2"></i> Giỏ hàng trống
+              </h2>
+              <p class="text-gray-300">Không có sản phẩm nào trong giỏ hàng của bạn</p>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>

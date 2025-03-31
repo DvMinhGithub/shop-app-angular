@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { CartService } from 'src/app/services/cart.service'
 
 @Component({
   selector: 'app-header',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core'
 })
 export class HeaderComponent {
   isMenuOpen = false
+  orderCount = 0
 
   menuItems = [
     { label: 'Trang Chủ', link: '/' },
@@ -21,5 +23,11 @@ export class HeaderComponent {
     } else {
       document.body.classList.remove('no-scroll')
     }
+  }
+
+  constructor(private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.orderCount =  this.cartService.getCart().size
   }
 }
