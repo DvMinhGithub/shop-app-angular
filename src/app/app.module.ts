@@ -1,21 +1,24 @@
-import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import { HomeComponent } from './pages/home/home.component'
-import { HeaderComponent } from './components/header/header.component'
-import { FooterComponent } from './components/footer/footer.component'
-import { RouterModule } from '@angular/router'
-import { ProductDetailComponent } from './pages/product-detail/product-detail.component'
-import { OrderComponent } from './pages/order/order.component'
-import { OrderConfirmComponent } from './pages/order-confirm/order-confirm.component'
-import { RegisterComponent } from './pages/register/register.component'
-import { CarouselModule } from 'ngx-owl-carousel-o'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { CommonModule } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
-import { LoginComponent } from './pages/login/login.component';
-import { ProductCardComponent } from './components/product-card/product-card.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
+import { NgModule } from '@angular/core'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { BrowserModule } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { RouterModule } from '@angular/router'
+import { CarouselModule } from 'ngx-owl-carousel-o'
+import { AppRoutingModule } from './app.routes'
+import { AppComponent } from './app/app.component'
+import { FooterComponent } from './components/footer/footer.component'
+import { HeaderComponent } from './components/header/header.component'
+import { PaginationComponent } from './components/pagination/pagination.component'
 import { ProductCardSkeletonComponent } from './components/product-card-skeleton/product-card-skeleton.component'
+import { ProductCardComponent } from './components/product-card/product-card.component'
+import { HomeComponent } from './pages/home/home.component'
+import { LoginComponent } from './pages/login/login.component'
+import { OrderComponent } from './pages/order/order.component'
+import { OrderDetailComponent } from './pages/order-detail/order-detail.component'
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component'
+import { RegisterComponent } from './pages/register/register.component'
 
 @NgModule({
   declarations: [
@@ -24,24 +27,26 @@ import { ProductCardSkeletonComponent } from './components/product-card-skeleton
     FooterComponent,
     ProductDetailComponent,
     OrderComponent,
-    OrderConfirmComponent,
+    OrderDetailComponent,
     RegisterComponent,
     LoginComponent,
     ProductCardComponent,
     PaginationComponent,
-    ProductCardSkeletonComponent
+    ProductCardSkeletonComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     RouterModule.forRoot([]),
     CarouselModule,
     BrowserAnimationsModule,
-    FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
-  bootstrap: [ProductDetailComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

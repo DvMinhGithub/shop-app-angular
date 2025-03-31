@@ -1,26 +1,25 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  isMenuOpen = false;
+  isMenuOpen = false
 
-  // Danh sách menu
   menuItems = [
     { label: 'Trang Chủ', link: '/' },
-    { label: 'Giới Thiệu', link: '/about' },
+    { label: 'Giỏ Hàng', link: '/order' },
     { label: 'Dịch Vụ', link: '/services' },
-    { label: 'Liên Hệ', link: '/contact' },
-  ];
+    { label: 'Liên Hệ', link: '/contact' }
+  ]
   toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen = !this.isMenuOpen
     if (this.isMenuOpen) {
-      document.body.classList.add('no-scroll');
+      document.body.classList.add('no-scroll')
     } else {
-      document.body.classList.remove('no-scroll');
+      document.body.classList.remove('no-scroll')
     }
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
+import { ActivatedRoute, Route, Router } from '@angular/router'
 import { CarouselComponent, OwlOptions } from 'ngx-owl-carousel-o'
 import { CartService } from 'src/app/services/cart.service'
 import { ProductService } from 'src/app/services/product.service'
@@ -51,15 +52,20 @@ export class ProductDetailComponent implements OnInit {
     margin: 8
   }
 
-  constructor(private productService: ProductService, private cartService: CartService) {}
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.loadProductDetail()
   }
 
   loadProductDetail(): void {
-    const productId = 1
-    if (!productId) {
+    const productId = parseInt(this.route.snapshot.paramMap.get('id') || '', 10)
+
+    if (isNaN(productId)) {
       console.error('Product ID is not found')
       return
     }
