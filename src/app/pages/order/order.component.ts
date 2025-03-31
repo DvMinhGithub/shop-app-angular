@@ -1,72 +1,107 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IOrderItem } from 'src/app/types/order';
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { CartService } from 'src/app/services/cart.service'
+import { OrderService } from 'src/app/services/order.service'
+import { ProductService } from 'src/app/services/product.service'
+import { IOrderCreateRequest, IOrderItem } from 'src/app/types/order'
+import { IProduct } from 'src/app/types/product'
+import { IApiResponse } from 'src/app/types/response'
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss']
 })
-export class OrderComponent {
-  orderForm: FormGroup;
-  couponCode = '';
-  orderItems: IOrderItem[] = [
-    {
-      id: 1,
-      name: 'iPhone 14 Pro Max',
-      image: '../../assets/images/product.png',
-      price: 29990000,
-      quantity: 1
-    },
-    {
-      id: 2,
-      name: 'AirPods Pro 2',
-      image: '../../assets/images/product.png',
-      price: 5990000,
-      quantity: 2
-    }
-  ];
+export class OrderComponent implements OnInit {
+  orderForm: FormGroup
+  couponCode = ''
+  orderItems!: IOrderItem[]
+  isLoading = false
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private cartService: CartService,
+    private orderService: OrderService
+  ) {
     this.orderForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
+      fullName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10,11}$/)]],
-      address: ['', Validators.required]
-    });
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10,11}$/)]],
+      address: ['', Validators.required],
+      note: [''],
+      paymentMethod: ['cod', Validators.required],
+      shippingMethod: ['standard', Validators.required]
+    })
+  }
+
+  ngOnInit(): void {
+    this.isLoading = true
+    const cart = this.cartService.getCart()
+    const productIds = Array.from(cart.keys())
+    this.productService.getProductByIds(productIds).subscribe({
+      next: (res: IApiResponse<IProduct[]>) => {
+        this.orderItems = res.result.map((product) => ({
+          id: product.id,
+          name: product.name,
+          image: product.thumbnail[0],
+          price: product.price,
+          quantity: cart.get(product.id) || 0
+        }))
+        console.log('Order items:', this.orderItems);
+        this.isLoading = false
+      },
+      error: (error) => {
+        console.error('Error:', error)
+        this.isLoading = false
+      }
+    })
   }
 
   get totalPrice(): number {
-    return this.orderItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    if (!this.orderItems) {
+      return 0
+    }
+    return this.orderItems.reduce((total, item) => total + item.price * item.quantity, 0)
   }
 
   applyCoupon(): void {
     if (this.couponCode) {
-      console.log('Applying coupon:', this.couponCode);
+      console.log('Applying coupon:', this.couponCode)
     }
   }
 
   submitOrder(): void {
     if (this.orderForm.valid) {
-      const orderData = {
-        customerInfo: this.orderForm.value,
-        items: this.orderItems,
-        coupon: this.couponCode,
-        total: this.totalPrice
-      };
-      console.log('Order submitted:', orderData);
+      const orderData: IOrderCreateRequest = {
+        userId: '2',
+        ...this.orderForm.value,
+        cartItems: this.orderItems.map((item) => ({
+          productId: item.id,
+          quantity: item.quantity
+        }))
+      }
+      console.log('Order submitted:', orderData)
+      this.orderService.createOrder(orderData).subscribe({
+        next: (res) => {
+          console.log('Order created:', res)
+        },
+        error: (error) => {
+          console.error('Error:', error)
+        }
+      })
     } else {
-      this.orderForm.markAllAsTouched();
+      this.orderForm.markAllAsTouched()
     }
   }
 
   updateQuantity(item: IOrderItem, newQuantity: number): void {
     if (newQuantity > 0) {
-      item.quantity = newQuantity;
+      item.quantity = newQuantity
     }
   }
 
   removeItem(itemId: number): void {
-    this.orderItems = this.orderItems.filter(item => item.id !== itemId);
+    this.orderItems = this.orderItems.filter((item) => item.id !== itemId)
   }
 }
