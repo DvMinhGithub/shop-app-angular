@@ -1,7 +1,4 @@
-<app-header />
-
 <div class="bg-gray-900 min-h-screen">
-  <!-- Hero Section -->
   <div
     class="relative bg-gradient-to-br from-gray-800 to-gray-900 py-10 px-4 sm:px-6 lg:px-8 text-center border-b border-gray-700"
   >
@@ -12,13 +9,11 @@
         Khám phá bộ sưu tập sản phẩm chất lượng cao với giá cả hợp lý
       </p>
 
-      <!-- Action Buttons -->
       <div class="flex flex-wrap justify-center gap-4 mb-12">
         <a href="/products" class="btn-primary"> Xem sản phẩm </a>
         <a href="/sale" class="btn-outline"> Khuyến mãi đặc biệt </a>
       </div>
 
-      <!-- Search Form -->
       <div class="flex flex-col md:flex-row justify-center gap-3 mb-8 px-4">
         <input type="text" class="form-input flex-1" placeholder="Tìm sản phẩm" [(ngModel)]="searchProduct.keyword" />
         <select class="form-select w-60 max-md:w-full" [(ngModel)]="searchProduct.categoryId">
@@ -30,7 +25,6 @@
         <button class="btn-primary" (click)="loadProducts()">Tìm kiếm</button>
       </div>
 
-      <!-- Scroll Indicator -->
       <div class="animate-bounce pt-8">
         <svg class="w-6 h-6 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -40,23 +34,19 @@
     </div>
   </div>
 
-  <!-- Product Grid -->
   <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-    <!-- Loading State -->
     <ng-container *ngIf="isLoading; else content">
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <app-product-card-skeleton *ngFor="let item of [1, 2, 3, 4, 5, 6]"></app-product-card-skeleton>
       </div>
     </ng-container>
 
-    <!-- Content State -->
     <ng-template #content>
       <div *ngIf="products.length > 0" class="flex flex-col gap-8">
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
         </div>
 
-        <!-- Pagination -->
         <div class="mt-8 flex justify-center">
           <app-pagination
             [currentPage]="searchProduct.page"
@@ -67,7 +57,6 @@
         </div>
       </div>
 
-      <!-- Empty State -->
       <div *ngIf="products.length === 0 && !isLoading" class="text-center py-16">
         <div class="mx-auto max-w-md">
           <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,5 +74,3 @@
     </ng-template>
   </div>
 </div>
-
-<app-footer />
