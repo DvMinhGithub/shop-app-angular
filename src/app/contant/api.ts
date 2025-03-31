@@ -8,7 +8,7 @@ export const headersApi = (refreshToken?: string): HttpHeaders => {
 
   headers = headers.set('Content-Type', 'application/json')
 
-  const accessToken = localStorage.getItem('accessToken')
+  const accessToken = localStorage.getItem('access_token')
   const tokenToUse = refreshToken || accessToken
 
   if (tokenToUse) {
@@ -28,11 +28,16 @@ export const roleApi = {
 }
 
 export const productApi = {
-  getProducts: (request: IListProductsRequest) => `${Url}/products?keyword=${request.keyword}&categoryId=${request.categoryId}&page=${request.page}&limit=${request.limit}`,
+  getProducts: (request: IListProductsRequest) =>
+    `${Url}/products?keyword=${request.keyword}&categoryId=${request.categoryId}&page=${request.page}&limit=${request.limit}`,
   getProducDetail: (id: number): string => `${Url}/products/${id}`,
+  getProductByIds: (ids: number[]): string => `${Url}/products/ids?ids=${ids.join(',')}`
 }
-
 
 export const categoryApi = {
   getCategories: `${Url}/categories`
+}
+
+export const orderApi = {
+  createOrder: `${Url}/orders`
 }

@@ -18,4 +18,8 @@ export class ProductService {
   getProductDetail(id: number): Observable<IApiResponse<IProduct>> {
     return this.http.get<IApiResponse<IProduct>>(productApi.getProducDetail(id))
   }
+
+  getProductByIds(ids: number[]): Observable<IApiResponse<IProduct[]>> {
+    return this.http.get<IApiResponse<IProduct[]>>(productApi.getProductByIds(ids))
+  }
 }
