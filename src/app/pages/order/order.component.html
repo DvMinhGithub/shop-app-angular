@@ -16,7 +16,7 @@
                 type="text"
                 id="name"
                 formControlName="fullName"
-                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                class="input w-full text-white"
                 [ngClass]="{
                   'border-red-500': orderForm.get('fullName')?.invalid && orderForm.get('fullName')?.touched
                 }"
@@ -36,7 +36,7 @@
                 type="email"
                 id="email"
                 formControlName="email"
-                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                class="input w-full"
                 [ngClass]="{ 'border-red-500': orderForm.get('email')?.invalid && orderForm.get('email')?.touched }"
               />
               <div
@@ -54,7 +54,7 @@
                 type="tel"
                 id="phone"
                 formControlName="phoneNumber"
-                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                class="input w-full text-white"
                 [ngClass]="{ 'border-red-500': orderForm.get('phone')?.invalid && orderForm.get('phone')?.touched }"
               />
               <div
@@ -72,7 +72,7 @@
                 id="address"
                 formControlName="address"
                 rows="3"
-                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                class="input-textarea w-full"
                 [ngClass]="{ 'border-red-500': orderForm.get('address')?.invalid && orderForm.get('address')?.touched }"
               ></textarea>
               <div
@@ -88,7 +88,7 @@
                 id="note"
                 formControlName="note"
                 rows="3"
-                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                class="input-textarea w-full"
               ></textarea>
             </div>
             <div>
@@ -96,7 +96,7 @@
               <select
                 id="shipping"
                 formControlName="shippingMethod"
-                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                class="input-select w-full"
               >
                 <option value="fast">Giao hàng nhanh</option>
                 <option value="normal">Giao hàng thường</option>
@@ -107,7 +107,7 @@
               <select
                 id="payment"
                 formControlName="paymentMethod"
-                class="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                class="input-select w-full"
               >
                 <option value="cod">Thanh toán khi nhận hàng</option>
                 <option value="online">Thanh toán online</option>
@@ -254,11 +254,11 @@
                     type="text"
                     [(ngModel)]="couponCode"
                     placeholder="Nhập mã giảm giá"
-                    class="flex-1 p-3 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    class="flex-1 input w-full"
                   />
                   <button
                     (click)="applyCoupon()"
-                    class="px-6 py-3 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+                    class="btn bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
                   >
                     Áp dụng
                   </button>
@@ -268,7 +268,7 @@
               <button
                 (click)="submitOrder()"
                 [disabled]="orderForm.invalid || orderItems.length === 0"
-                class="w-full mt-6 py-3 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                class="btn w-full mt-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <i class="fas fa-credit-card mr-2"></i> ĐẶT HÀNG NGAY
               </button>
@@ -280,7 +280,7 @@
                   <i class="fas fa-shopping-cart mr-2"></i> Giỏ hàng trống
                 </h2>
                 <p class="text-gray-300">Không có sản phẩm nào trong giỏ hàng của bạn</p>
-                <button routerLink="/products" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                <button routerLink="/" class="mt-4 btn-primary">
                   Tiếp tục mua sắm
                 </button>
               </div>

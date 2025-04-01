@@ -1,86 +1,73 @@
 form {
-  @apply w-full mx-auto p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm dark:shadow-md;
+  @apply max-w-md mx-auto;
 }
 
 label {
-  @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+  @apply block text-sm font-medium mb-1;
 }
 
-input[type='text'],
-input[type='password'],
-input[type='email'],
-input[type='number'],
-input[type='tel'],
-input[type='url'],
-input[type='date'],
-input[type='time'],
-textarea,
-select {
-  @apply w-full px-4 py-2 text-sm text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm;
-  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-600 dark:focus:border-blue-600;
-  @apply placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-200;
+.input {
+  @apply px-4 py-2 text-sm rounded-md shadow-sm;
+  @apply bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600;
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  @apply transition-all duration-200;
 }
 
-textarea {
-  @apply resize-y min-h-[100px];
+.input-text {
+  @apply input text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500;
 }
 
-select {
-  @apply appearance-none pr-10;
-
-  option {
-    @apply !text-white;
-  }
+.input-textarea {
+  @apply input min-h-[100px] resize-y;
 }
 
-input[type='checkbox'] {
-  @apply h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-blue-600 dark:text-blue-500 focus:ring-blue-500 dark:focus:ring-blue-600;
+.input-select {
+  @apply input appearance-none pr-10 bg-no-repeat bg-[center_right_0.5rem];
 }
 
-input[type='radio'] {
-  @apply h-4 w-4 border-gray-300 dark:border-gray-600 text-blue-600 dark:text-blue-500 focus:ring-blue-500 dark:focus:ring-blue-600;
+.input-checkbox {
+  @apply h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-blue-600;
+  @apply focus:ring-blue-500 dark:focus:ring-blue-600;
 }
 
-button {
-  @apply px-4 py-2 text-sm font-medium rounded-md shadow-sm transition-all duration-200;
+.input-radio {
+  @apply input-checkbox rounded-full;
 }
 
-button:not([type='submit']):not(.btn-outline) {
-  @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800;
-}
-
-.btn-outline {
-  @apply border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700;
-}
-
-button[type='submit'] {
-  @apply w-full px-4 py-3 bg-blue-600 text-white font-bold hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
-}
-
-button:disabled {
-  @apply opacity-50 cursor-not-allowed;
-}
-
-.error-message {
-  @apply text-red-500 dark:text-red-400 text-sm mt-1;
-}
-
-.input-error {
-  @apply border-red-500 dark:border-red-400 focus:ring-red-500 dark:focus:ring-red-400;
+.btn {
+  @apply px-4 py-2 text-sm font-medium rounded-md shadow-sm ;
+  @apply transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
 }
 
 .btn-primary {
-  @apply px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition duration-300;
+  @apply btn bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500;
 }
 
 .btn-outline {
-  @apply px-4 py-2 bg-transparent border-2 border-white hover:border-blue-400 text-white hover:text-blue-400 font-semibold rounded-lg transition duration-300;
+  @apply btn border border-gray-300 dark:border-gray-600;
+  @apply text-gray-700 dark:text-gray-300 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700;
 }
 
-.form-input {
-  @apply px-4 py-2 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500;
+.btn-submit {
+  @apply w-full px-4 py-3 text-base font-bold;
 }
 
-.form-select {
-  @apply px-4 py-2 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500;
+.text-error {
+  @apply text-red-500 dark:text-red-400;
+}
+
+.border-error {
+  @apply border-red-500 dark:border-red-400 focus:ring-red-500 dark:focus:ring-red-400;
+}
+
+.is-disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.mb-label {
+  @apply mb-1;
+}
+
+.dark\:bg-surface {
+  @apply dark:bg-gray-800;
 }

@@ -6,10 +6,6 @@ button {
   }
 }
 
-.btn {
-  @apply bg-transparent;
-}
-
 .btn-active {
   @apply bg-blue-500 text-white;
 }

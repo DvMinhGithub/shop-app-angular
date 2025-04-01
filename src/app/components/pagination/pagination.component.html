@@ -1,40 +1,27 @@
 <div class="flex flex-wrap items-center justify-center gap-1 sm:gap-2">
-  <button
-    (click)="goToFirst()"
-    [disabled]="currentPage === 1"
-    [class.btn-active]="currentPage === 1"
-  >
+  <button class="btn" (click)="goToFirst()" [disabled]="currentPage === 1" [class.btn-active]="currentPage === 1">
     &laquo;
   </button>
 
-  <button
-    (click)="goToPrev()"
-    [disabled]="currentPage === 1"
-  >
-    &lsaquo;
-  </button>
+  <button class="btn" (click)="goToPrev()" [disabled]="currentPage === 1">&lsaquo;</button>
 
   <ng-container *ngFor="let page of pages">
     <button
+      class="btn"
       (click)="goToPage(page)"
-      [class.btn]="page !== currentPage"
       [class.btn-active]="page === currentPage"
     >
       {{ page }}
     </button>
   </ng-container>
 
-  <button
-    (click)="goToNext()"
-    [disabled]="currentPage === totalPages"
-  >
-    &rsaquo;
-  </button>
+  <button class="btn" (click)="goToNext()" [disabled]="currentPage === totalPages">&rsaquo;</button>
 
   <button
+    class="btn"
     (click)="goToLast()"
-    [disabled]="currentPage === totalPages"
     [class.btn-active]="currentPage === totalPages"
+    [disabled]="currentPage === totalPages"
   >
     &raquo;
   </button>

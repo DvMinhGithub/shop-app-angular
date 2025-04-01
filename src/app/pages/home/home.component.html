@@ -15,10 +15,10 @@
       </div>
 
       <div class="flex flex-col md:flex-row justify-center gap-3 mb-8 px-4">
-        <input type="text" class="form-input flex-1" placeholder="Tìm sản phẩm" [(ngModel)]="searchProduct.keyword" />
-        <select class="form-select w-60 max-md:w-full" [(ngModel)]="searchProduct.categoryId">
-          <option [ngValue]="0" class="text-gray-900">Tất cả</option>
-          <option *ngFor="let category of categories" [value]="category.id" class="text-gray-900">
+        <input type="text" class="input-text flex-1" placeholder="Tìm sản phẩm" [(ngModel)]="searchProduct.keyword" />
+        <select class="input-select w-60 max-md:w-full" [(ngModel)]="searchProduct.categoryId">
+          <option [ngValue]="0">Tất cả</option>
+          <option *ngFor="let category of categories" [value]="category.id">
             {{ category.name }}
           </option>
         </select>
