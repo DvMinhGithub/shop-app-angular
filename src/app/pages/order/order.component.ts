@@ -16,7 +16,7 @@ export class OrderComponent implements OnInit {
   orderForm: FormGroup
   couponCode = ''
   orderItems!: IOrderItem[]
-  isLoading = false
+  isLoading = true
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +36,6 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoading = true
     const cart = this.cartService.getCart()
     const productIds = Array.from(cart.keys())
     this.productService.getProductByIds(productIds).subscribe({
