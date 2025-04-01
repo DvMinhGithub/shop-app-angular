@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 import { CartService } from 'src/app/services/cart.service'
 import { OrderService } from 'src/app/services/order.service'
 import { ProductService } from 'src/app/services/product.service'
+import { TokenService } from 'src/app/services/token.service'
 import { IOrderCreateRequest, IOrderItem } from 'src/app/types/order'
 import { IProduct } from 'src/app/types/product'
 import { IApiResponse } from 'src/app/types/response'
@@ -16,13 +18,16 @@ export class OrderComponent implements OnInit {
   orderForm: FormGroup
   couponCode = ''
   orderItems!: IOrderItem[]
+  userId!: number | null
   isLoading = true
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private productService: ProductService,
     private cartService: CartService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private tokenService: TokenService
   ) {
     this.orderForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3)]],
@@ -38,6 +43,7 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     const cart = this.cartService.getCart()
     const productIds = Array.from(cart.keys())
+    this.userId = this.tokenService.getUserId()
     this.productService.getProductByIds(productIds).subscribe({
       next: (res: IApiResponse<IProduct[]>) => {
         this.orderItems = res.result.map((product) => ({
@@ -47,7 +53,7 @@ export class OrderComponent implements OnInit {
           price: product.price,
           quantity: cart.get(product.id) || 0
         }))
-        console.log('Order items:', this.orderItems);
+        console.log('Order items:', this.orderItems)
         this.isLoading = false
       },
       error: (error) => {
@@ -73,17 +79,17 @@ export class OrderComponent implements OnInit {
   submitOrder(): void {
     if (this.orderForm.valid) {
       const orderData: IOrderCreateRequest = {
-        userId: '2',
+        userId: this.userId,
         ...this.orderForm.value,
         cartItems: this.orderItems.map((item) => ({
           productId: item.id,
           quantity: item.quantity
         }))
       }
-      console.log('Order submitted:', orderData)
       this.orderService.createOrder(orderData).subscribe({
         next: (res) => {
           console.log('Order created:', res)
+          this.router.navigate(["/"])
         },
         error: (error) => {
           console.error('Error:', error)

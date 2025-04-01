@@ -8,3 +8,14 @@
   overflow-y: scroll;
   touch-action: none;
 }
+
+body {
+  @supports (scrollbar-gutter: stable) {
+    scrollbar-gutter: stable;
+    padding-right: 16px;
+  }
+  
+  @supports not (scrollbar-gutter: stable) {
+    padding-right: calc(20px + (100vw - 100%));
+  }
+}

@@ -70,11 +70,11 @@ button:disabled {
 }
 
 .btn-primary {
-  @apply px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition duration-300;
+  @apply px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition duration-300;
 }
 
 .btn-outline {
-  @apply px-8 py-3 bg-transparent border-2 border-white hover:border-blue-400 text-white hover:text-blue-400 font-semibold rounded-lg transition duration-300;
+  @apply px-4 py-2 bg-transparent border-2 border-white hover:border-blue-400 text-white hover:text-blue-400 font-semibold rounded-lg transition duration-300;
 }
 
 .form-input {

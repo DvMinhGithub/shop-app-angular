@@ -5,7 +5,7 @@ import { finalize } from 'rxjs/operators'
 import { UserService } from 'src/app/services/user.service'
 import { TokenService } from 'src/app/services/token.service'
 import { IApiResponse } from 'src/app/types/response'
-import { ILoginRequest, ILoginResponse } from 'src/app/types/user'
+import { ILoginRequest, ILoginResponse, IUser } from 'src/app/types/user'
 
 type ValidationMessages = Record<string, Record<string, string>>;
 
@@ -19,6 +19,7 @@ export class LoginComponent {
   showPassword = false
   isLoading = false
   errorMessage: string | null = null
+  userDetail!: IUser
 
   validationMessages: ValidationMessages = {
     phoneNumber: {
@@ -63,12 +64,25 @@ export class LoginComponent {
         next: (res: IApiResponse<ILoginResponse>) => {
           this.tokenService.setToken(res.result.token)
           this.router.navigate(['/'])
+          this.getUserDetails()
         },
         error: (error) => {
           console.error('Login error:', error)
           this.errorMessage = error.error?.message || 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.'
         }
       })
+  }
+
+  getUserDetails(): void {
+    this.userService.details().subscribe({
+      next: (res) => {
+        this.userDetail = res.result
+        this.userService.saveUser(res.result)
+      },
+      error: (error) => {
+        console.error('Get user details error:', error)
+      }
+    })
   }
 
   getValidationMessage(controlName: string): string {

@@ -20,7 +20,8 @@ export const headersApi = (refreshToken?: string): HttpHeaders => {
 
 export const userApi = {
   register: `${Url}/users/register`,
-  login: `${Url}/users/login`
+  login: `${Url}/users/login`,
+  details: `${Url}/users/details`
 }
 
 export const roleApi = {
