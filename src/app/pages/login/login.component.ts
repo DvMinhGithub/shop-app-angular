@@ -78,6 +78,9 @@ export class LoginComponent {
       next: (res) => {
         this.userDetail = res.result
         this.userService.saveUser(res.result)
+        if (this.userDetail.role.name === 'admin') {
+          this.router.navigate(['/admin'])
+        }
       },
       error: (error) => {
         console.error('Get user details error:', error)
