@@ -10,6 +10,7 @@ import { OrderDetailComponent } from './pages/order-detail/order-detail.componen
 import { OrderComponent } from './pages/order/order.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { OrderAdminComponent } from './components/admin/order-admin/order-admin.component';
 
 const routes: Routes = [
   {
@@ -24,8 +25,19 @@ const routes: Routes = [
   },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [AdminGuardFn] }
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AdminGuardFn], // Thêm guard nếu cần
+    children: [
+      { path: '', redirectTo: 'orders', pathMatch: 'full' }, // Redirect mặc định
+      { path: 'orders', component: OrderAdminComponent }
+      // { path: 'categories', component: CategoriesAdminComponent }, // Thêm component mới
+      // { path: 'products', component: ProductsAdminComponent } // Thêm component mới
+    ]
+  }
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

@@ -30,8 +30,6 @@ export class UserService {
 
   getUser(): IUser {
     const user = localStorage.getItem('user')
-    console.log(user);
-    
     return user ? JSON.parse(user) : null
   }
 

@@ -20,7 +20,9 @@ import { OrderDetailComponent } from './pages/order-detail/order-detail.componen
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component'
 import { RegisterComponent } from './pages/register/register.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-import { AdminComponent } from './components/admin/admin/admin.component'
+import { AdminComponent } from './components/admin/admin/admin.component';
+import { OrderAdminComponent } from './components/admin/order-admin/order-admin.component';
+import { OrderDetailAdminComponent } from './components/admin/order-detail-admin/order-detail-admin.component'
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { AdminComponent } from './components/admin/admin/admin.component'
     ProductCardSkeletonComponent,
     AppComponent,
     MainLayoutComponent,
-    AdminComponent
+    AdminComponent,
+    OrderAdminComponent,
+    OrderDetailAdminComponent
   ],
   imports: [
     BrowserModule,

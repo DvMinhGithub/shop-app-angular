@@ -1,4 +1,5 @@
 import { IProductOrder } from './product'
+import { IPaginatedResponse } from './response'
 
 export interface IOrderItem {
   id: number
@@ -48,6 +49,8 @@ export interface IOrderResponse {
   status: string
   orderDetails: IOrderDetails[]
 }
+
+export type TPaginatedOrderResponse = IPaginatedResponse<IOrderResponse>
 
 export interface IOrderCreateRequest {
   userId: string

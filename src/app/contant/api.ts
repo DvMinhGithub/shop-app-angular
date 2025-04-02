@@ -1,5 +1,6 @@
 import { HttpHeaders } from '@angular/common/http'
 import { IListProductsRequest } from '../types/product'
+import { IPagination } from '../types/request'
 
 export const Url = 'http://localhost:8080/api/v1'
 
@@ -30,7 +31,9 @@ export const roleApi = {
 
 export const productApi = {
   getProducts: (request: IListProductsRequest) =>
-    `${Url}/products?keyword=${request.keyword}&categoryId=${request.categoryId}&page=${request.page}&limit=${request.limit}`,
+    `${Url}/products?keyword=${request.keyword}&categoryId=${request.categoryId}&page=${request.page - 1}&limit=${
+      request.limit
+    }`,
   getProducDetail: (id: number): string => `${Url}/products/${id}`,
   getProductByIds: (ids: number[]): string => `${Url}/products/ids?ids=${ids.join(',')}`
 }
@@ -41,7 +44,9 @@ export const categoryApi = {
 
 export const orderApi = {
   createOrder: `${Url}/orders`,
-  getOrder: (orderId: number): string => `${Url}/orders/${orderId}`
+  getOrder: (orderId: number): string => `${Url}/orders/${orderId}`,
+  getOrdersByKey: (key: string, pagi: IPagination): string =>
+    `${Url}/orders/all?keyword=${key}&page=${pagi.page - 1}&size=${pagi.limit}`
 }
 
 export const orderDetailApi = {
