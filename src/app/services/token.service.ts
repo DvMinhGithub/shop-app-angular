@@ -12,10 +12,10 @@ export class TokenService {
     return localStorage.getItem(this.ACCESS_TOKEN_KEY)
   }
 
-  getUserId(): number | null {
+  getUserId(): number {
     const token = this.getToken()
     if (!token) {
-      return null
+      return 0
     }
 
     const decodedToken = this.jwtHelper.decodeToken(token)
@@ -30,7 +30,7 @@ export class TokenService {
     localStorage.removeItem(this.ACCESS_TOKEN_KEY)
   }
 
-  isTokenExpired(token: string): boolean {
-    return this.jwtHelper.isTokenExpired(token)
+  isTokenExpired(): boolean {
+    return this.jwtHelper.isTokenExpired(this.getToken())
   }
 }

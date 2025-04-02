@@ -19,7 +19,8 @@ import { OrderComponent } from './pages/order/order.component'
 import { OrderDetailComponent } from './pages/order-detail/order-detail.component'
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component'
 import { RegisterComponent } from './pages/register/register.component';
-import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { AdminComponent } from './components/admin/admin/admin.component'
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
     PaginationComponent,
     ProductCardSkeletonComponent,
     AppComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

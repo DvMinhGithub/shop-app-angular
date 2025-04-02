@@ -1,12 +1,15 @@
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './components/admin/admin/admin.component';
+import { AdminGuardFn } from './components/guards/admin.guards';
+import { AuthGuardFn } from './components/guards/auth.guards';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
 import { OrderComponent } from './pages/order/order.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { NgModule } from '@angular/core';
-import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 const routes: Routes = [
   {
@@ -15,12 +18,13 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'product/:id', component: ProductDetailComponent },
-      { path: 'order', component: OrderComponent },
-      { path: 'order-detail/:id', component: OrderDetailComponent }
+      { path: 'order', component: OrderComponent, canActivate: [AuthGuardFn] },
+      { path: 'order-detail/:id', component: OrderDetailComponent, canActivate: [AuthGuardFn] }
     ]
   },
   { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuardFn] }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
