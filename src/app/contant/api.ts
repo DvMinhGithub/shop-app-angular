@@ -31,9 +31,7 @@ export const roleApi = {
 
 export const productApi = {
   getProducts: (request: IListProductsRequest) =>
-    `${Url}/products?keyword=${request.keyword}&categoryId=${request.categoryId}&page=${request.page - 1}&limit=${
-      request.limit
-    }`,
+    `${Url}/products?keyword=${request.keyword}&categoryId=${request.categoryId}&page=${request.page}&limit=${request.limit}`,
   getProducDetail: (id: number): string => `${Url}/products/${id}`,
   getProductByIds: (ids: number[]): string => `${Url}/products/ids?ids=${ids.join(',')}`
 }
