@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     { label: 'Liên Hệ', link: '/contact' }
   ]
 
-  constructor(private cartService: CartService, private userService: UserService) {}
+  constructor(public cartService: CartService, private userService: UserService) {}
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen
