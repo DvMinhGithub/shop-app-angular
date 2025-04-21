@@ -1,0 +1,77 @@
+import { Component, OnInit } from '@angular/core'
+import { CategoryService } from 'src/app/core/services/category.service'
+import { ProductService } from 'src/app/core/services/product.service'
+import { ICategory } from 'src/app/shared/models/category'
+import { IProduct, IListProductsRequest, IProductListResponse } from 'src/app/shared/models/product'
+import { IApiResponse } from 'src/app/shared/models/response'
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
+})
+export class HomeComponent implements OnInit {
+  products: IProduct[] = []
+  categories: ICategory[] = []
+  totalPages = 0
+  searchProduct: IListProductsRequest = {
+    keyword: '',
+    categoryId: 0,
+    page: 1,
+    limit: 12
+  }
+
+  isLoadingProducts = true
+  isLoadingCategories = true
+  isInitialLoad = true
+
+  constructor(private productService: ProductService, private categoryService: CategoryService) {}
+
+  ngOnInit(): void {
+    this.loadProducts()
+    this.loadCategories()
+  }
+
+  loadProducts(): void {
+    this.isLoadingProducts = true
+
+    this.productService.getProducts(this.searchProduct).subscribe({
+      next: (res: IApiResponse<IProductListResponse>) => {
+        this.products = res.result.products
+        this.totalPages = res.result.totalPages
+        this.isLoadingProducts = false
+        this.isInitialLoad = false
+      },
+      error: (error: Error) => {
+        console.error('There was an error!', error)
+        this.isLoadingProducts = false
+        this.isInitialLoad = false
+      }
+    })
+  }
+
+  loadCategories(): void {
+    this.isLoadingCategories = true
+
+    this.categoryService.getCategories().subscribe({
+      next: (res: IApiResponse<ICategory[]>) => {
+        this.categories = res.result
+        this.isLoadingCategories = false
+      },
+      error: (error: Error) => {
+        console.error('There was an error!', error)
+        this.isLoadingCategories = false
+      }
+    })
+  }
+
+  onPageChange(page: number): void {
+    this.searchProduct.page = page
+    this.loadProducts()
+    window.scrollTo(0, 0)
+  }
+
+  get isLoading(): boolean {
+    return this.isLoadingProducts || (this.isInitialLoad && this.products.length === 0)
+  }
+}
