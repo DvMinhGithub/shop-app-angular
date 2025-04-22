@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core'
 import { CartService } from 'src/app/core/services/cart.service'
 import { IProduct } from 'src/app/shared/models/product'
+import { getProductImage } from '../../utils/product'
 
 @Component({
   selector: 'app-product-card',
@@ -23,7 +24,4 @@ export class ProductCardComponent {
   buyNow(): void {
     this.addToCart()
   }
-}
-function getProductImage(product: IProduct): string {
-  throw new Error('Function not implemented.')
 }
