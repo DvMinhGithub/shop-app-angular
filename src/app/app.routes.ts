@@ -17,22 +17,26 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: HomeComponent },
+      {
+        path: '',
+        loadChildren: () => import('./features/products/products.module').then((m) => m.ProductsModule)
+      },
+      {
+        path: 'orders',
+        loadChildren: () => import('./features/orders/orders.module').then((m) => m.OrdersModule)
+      },
       { path: 'product/:id', component: ProductDetailComponent },
       { path: 'order', component: OrderComponent, canActivate: [AuthGuardFn] },
       { path: 'order-detail/:id', component: OrderDetailComponent, canActivate: [AuthGuardFn] }
     ]
   },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'auth',
+    loadChildren: () => import('./features/auth/auth.module').then((m) => m.AuthModule)
+  },
   {
     path: 'admin',
-    component: DashboardComponent,
-    canActivate: [AdminGuardFn],
-    children: [
-      { path: '', redirectTo: 'orders', pathMatch: 'full' },
-      { path: 'orders', component: AdminOrderListComponent }
-    ]
+    loadChildren: () => import('./features/admin/admin.module').then((m) => m.AdminModule)
   }
 ]
 
