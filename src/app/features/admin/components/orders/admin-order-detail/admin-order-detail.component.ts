@@ -11,7 +11,7 @@ import { IPagination } from 'src/app/shared/models/request'
 export class AdminOrderDetailComponent {
   isLoading = true
   orders: IOrderResponse[] = []
-  keyword: string = ''
+  keyword = ''
   pagination: IPagination = {
     page: 1,
     limit: 12

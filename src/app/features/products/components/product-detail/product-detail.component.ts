@@ -29,7 +29,9 @@ export class ProductDetailComponent implements OnInit {
     dots: false,
     navSpeed: 700,
     responsive: {
-      0: { items: 1 }
+      0: { items: 1 },
+      600: { items: 1 },
+      1000: { items: 1 },
     },
     autoplay: true,
     autoplayTimeout: 5000,
@@ -74,7 +76,7 @@ export class ProductDetailComponent implements OnInit {
         this.product = res.result
         this.isLoading = false
       },
-      error: (err) => {
+      error: (err: Error) => {
         console.error(err)
         this.isLoading = false
       }

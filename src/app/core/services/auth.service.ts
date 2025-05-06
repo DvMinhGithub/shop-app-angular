@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { environment } from '../../../environments/environment'
+import { IUser } from 'src/app/shared/models/user'
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/auth/login`, { username, password }).pipe(
-      map((user) => {
+      map((user: IUser) => {
         localStorage.setItem('currentUser', JSON.stringify(user))
         this.currentUserSubject.next(user)
         return user

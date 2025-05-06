@@ -18,6 +18,10 @@ module.exports = {
           "2xl": "1536px",
         },
       },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+        serif: ["Merriweather", "serif"],
+      },
     },
   },
   plugins: [
