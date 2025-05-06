@@ -15,7 +15,7 @@ export class DashboardComponent {
   ]
 
   @HostListener('document:keydown.escape', ['$event'])
-  onKeydownHandler(event: KeyboardEvent) {
+  onKeydownHandler() {
     if (this.isMenuOpen) {
       this.toggleMenu()
     }

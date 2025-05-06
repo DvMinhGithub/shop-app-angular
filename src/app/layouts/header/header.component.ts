@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   currentUser!: IUser | null
   menuItems = [
     { label: 'Trang Chủ', link: '/' },
-    { label: 'Giỏ Hàng', link: '/order' },
+    { label: 'Giỏ Hàng', link: '/orders' },
     { label: 'Dịch Vụ', link: '/services' },
     { label: 'Liên Hệ', link: '/contact' }
   ]
@@ -38,6 +38,5 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.orderCount = this.cartService.getCart().size
     this.currentUser = this.userService.getUser()
-    console.log(this.currentUser);
   }
 }

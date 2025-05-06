@@ -1,0 +1,28 @@
+<div class="container bg-gray-800 p-4 shadow-sm rounded-lg my-8 border border-gray-700">
+  <div class="flex flex-col md:flex-row gap-4 items-stretch">
+    <app-search-input
+      class="w-full"
+      [placeholder]="'Tìm kiếm sản phẩm...'"
+      [bgColor]="'bg-gray-700'"
+      [textColor]="'text-gray-100'"
+      [borderColor]="'border-gray-600'"
+      (searchChange)="onSearch($event)"
+    ></app-search-input>
+
+    <app-select-filter
+      [options]="categories"
+      [bgColor]="'bg-gray-700'"
+      [textColor]="'text-gray-100'"
+      [borderColor]="'border-gray-600'"
+      (valueChange)="onCategoryChange($event)"
+    ></app-select-filter>
+
+    <app-select-filter
+      [options]="sortOptions"
+      [bgColor]="'bg-gray-700'"
+      [textColor]="'text-gray-100'"
+      [borderColor]="'border-gray-600'"
+      (valueChange)="onSortChange($event)"
+    ></app-select-filter>
+  </div>
+</div>

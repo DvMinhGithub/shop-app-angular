@@ -22,7 +22,7 @@
         >
           {{ item.label }}
           <span
-            *ngIf="item.link === '/order' && cartService.cartCount() > 0"
+            *ngIf="item.link === '/orders' && cartService.cartCount() > 0"
             class="absolute top-0 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
           >
             {{ cartService.cartCount() }}

@@ -19,7 +19,7 @@ export interface IOrder {
   shippingAddress: string
   paymentMethod: string
 }
-
+       
 export interface IOrderDetails {
   id: number
   product: IProductOrder

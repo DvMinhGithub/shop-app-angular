@@ -12,7 +12,7 @@ export class AdminGuard {
   constructor(private router: Router, private tokenService: TokenService, private userService: UserService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let user: IUser = this.userService.getUser()
+    const user: IUser = this.userService.getUser()
     if (user.role.name === 'ADMIN') {
       return true
     }

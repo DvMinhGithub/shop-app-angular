@@ -1,0 +1,45 @@
+<div class="container mx-auto px-4 py-10">
+  <h2 class="text-2xl font-bold mb-6 text-center text-gray-100">SẢN PHẨM NỔI BẬT</h2>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ng-container *ngIf="isLoadingProducts; else content">
+      <div class="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <app-product-card-skeleton *ngFor="let item of [1, 2, 3, 4, 5, 6]"></app-product-card-skeleton>
+      </div>
+    </ng-container>
+
+    <ng-template #content>
+      <div *ngIf="featuredProducts.length > 0" class="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <app-product-card 
+          *ngFor="let product of featuredProducts" 
+          [product]="product"
+          class="transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg"
+        ></app-product-card>
+      </div>
+
+      <div *ngIf="featuredProducts.length === 0 && !isLoadingProducts" class="text-center py-16">
+        <div class="mx-auto max-w-md">
+          <svg class="mx-auto h-12 w-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <h3 class="mt-2 text-lg font-medium text-gray-100">Không tìm thấy sản phẩm</h3>
+          <p class="mt-1 text-sm text-gray-400">Vui lòng thử lại sau hoặc xem danh mục khác</p>
+        </div>
+      </div>
+    </ng-template>
+
+    <div *ngIf="featuredProducts.length > 0" class="text-center mt-8">
+      <button 
+        class="px-6 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+        (click)="loadMore()"
+      >
+        Xem thêm sản phẩm
+      </button>
+    </div>
+  </div>
+</div>

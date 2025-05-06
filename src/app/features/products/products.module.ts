@@ -1,14 +1,13 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { RouterModule } from '@angular/router'
-import { HomeComponent } from './components/product-list/home.component'
-import { ProductDetailComponent } from './components/product-detail/product-detail.component'
-import { SharedModule } from '../../shared/share.module'
+import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { RouterModule } from '@angular/router'
 import { CarouselModule } from 'ngx-owl-carousel-o'
+import { SharedModule } from '../../shared/share.module'
+import { ProductDetailComponent } from './components/product-detail/product-detail.component'
 
 @NgModule({
-  declarations: [HomeComponent, ProductDetailComponent],
+  declarations: [ProductDetailComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -16,10 +15,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o'
     CarouselModule,
     SharedModule,
     RouterModule.forChild([
-      {
-        path: '',
-        component: HomeComponent
-      },
+      // {
+      //   path: '',
+      //   component: HomeComponentt
+      // },
       {
         path: ':id',
         component: ProductDetailComponent
