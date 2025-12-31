@@ -1,9 +1,18 @@
-<!-- main-layout.component.html -->
+<nz-back-top [nzVisibilityHeight]="100" [nzTemplate]="customTemplate"></nz-back-top>
+
+<ng-template #customTemplate>
+  <button class="back-top-button">
+    <i nz-icon nzType="arrow-up" nzTheme="outline"></i>
+  </button>
+</ng-template>
+
 <div class="app-container">
   <app-header></app-header>
 
   <main class="main-content">
-    <router-outlet></router-outlet>
+    <div class="page-wrapper">
+      <router-outlet></router-outlet>
+    </div>
   </main>
 
   <app-footer></app-footer>

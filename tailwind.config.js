@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,ts,css,scss}"],
+
+  corePlugins: {
+    preflight: false,
+  },
+
   theme: {
     extend: {
       container: {
@@ -24,6 +29,7 @@ module.exports = {
       },
     },
   },
+
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),

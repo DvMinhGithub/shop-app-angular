@@ -1,0 +1,55 @@
+/* main-layout.component.css */
+
+/* layout flex column */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+app-header {
+  flex: 0 0 auto;
+}
+
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+  flex: 1 0 auto;
+  background-color: white;
+  padding: 0;
+}
+
+.page-wrapper {
+  width: 100%;
+  padding: 0;
+}
+
+app-footer {
+  flex: 0 0 60px;
+  background-color: white;
+  text-align: center;
+  line-height: 60px;
+}
+
+/* custom button back-top góc dưới phải */
+.back-top-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #3b82f6; /* Tailwind blue-500 */
+  color: white;
+  border-radius: 9999px; /* tròn */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: background-color 0.2s;
+  z-index: 99999999999999;
+}
+
+.back-top-button:hover {
+  background-color: #2563eb; /* Tailwind blue-600 */
+}

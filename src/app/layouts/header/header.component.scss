@@ -1,15 +1,80 @@
+.header-css {
+  background-color: #ffffff;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
 .active-nav-link {
-  @apply text-white font-medium;
+  color: #2fc48d !important;
 }
-.active-nav-link span:nth-last-child(-n+2) {
-  @apply w-4/5 left-[10%] right-[10%];
+
+.active-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 0;
+  height: 2px;
+  background-color: #2fc48d;
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
-.active-mobile-nav-link {
-  @apply text-white bg-gray-700;
+
+.active-nav-link:focus,:hover {
+  color: #2fc48d;
 }
-.active-mobile-nav-link span {
-  @apply bg-purple-500;
+
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 0;
+  height: 0;
+  background-color: #2fc48d;
+  transition: height 0.3s ease;
 }
-nav.open {
-  transform: translateX(0);
+
+nav a:hover::after {
+  height: 2px;
+}
+
+.group > span {
+  position: relative;
+}
+
+.group > span::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 0;
+  height: 0;
+  background-color: #2fc48d;
+  transition: height 0.3s ease;
+}
+
+.group:hover > span::after,
+.group > span.text-\[\#2fc48d\]::after {
+  height: 2px;
+}
+
+.group:hover > div {
+  transform: translateY(0);
+}
+
+.group > div {
+  transform: translateY(5px);
+}
+
+@media (max-width: 1024px) {
+  nav a::after {
+    display: none;
+  }
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
 }

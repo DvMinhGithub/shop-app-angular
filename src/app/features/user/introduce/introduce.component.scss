@@ -1,0 +1,12 @@
+/* Chọn tất cả ảnh trong introduce-page */
+.introduce-page .introduce-img {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+/* Khi ảnh vào viewport, thêm class 'show' */
+.introduce-page .introduce-img.show {
+  opacity: 1;
+  transform: scale(1);
+}

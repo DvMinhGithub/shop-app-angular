@@ -1,0 +1,10 @@
+<div class="introduce-page max-w-[1360px] mx-auto px-4 md:px-8 lg:px-12 py-16 space-y-8">
+
+    <div *ngFor="let img of imageList"
+        class="overflow-hidden rounded-xl transition-all duration-1000">
+
+        <img [src]="img.src" [alt]="img.alt" class="w-full object-cover rounded-xl transition-all duration-1000">
+
+    </div>
+
+</div>

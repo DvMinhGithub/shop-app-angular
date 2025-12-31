@@ -4,8 +4,8 @@ import { Router } from '@angular/router'
 import { finalize } from 'rxjs/operators'
 import { TokenService } from 'src/app/core/services/token.service'
 import { UserService } from 'src/app/core/services/user.service'
-import { IApiResponse } from 'src/app/shared/models/response'
-import { IUser, ILoginRequest, ILoginResponse } from 'src/app/shared/models/user'
+import { IApiResponse } from 'src/app/shared/models/interface/response'
+import { IUser, ILoginRequest, ILoginResponse } from 'src/app/shared/models/interface/user'
 
 type ValidationMessages = Record<string, Record<string, string>>
 

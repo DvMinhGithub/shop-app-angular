@@ -1,0 +1,135 @@
+.custom-checkbox {
+    .ant-checkbox-inner {
+        border: 1.5px solid #9ca3af !important; // gray-400
+        width: 16px;
+        height: 16px;
+    }
+
+    .ant-checkbox-checked .ant-checkbox-inner {
+        background-color: #2563eb; // blue-600
+        border-color: #2563eb;
+    }
+}
+
+.icon-wrapper {
+    position: relative;
+    padding: 0px 30px;
+}
+
+[nz-icon] {
+    position: absolute;
+    top: -2px;
+    width: 16px;
+    height: 16px;
+    line-height: 1;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.25);
+}
+
+[nz-icon]:first-child {
+    left: 0;
+}
+
+[nz-icon]:last-child {
+    right: 0;
+}
+
+.icon-highlight {
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.price-range {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 4px;
+    background: #e5e7eb;
+    /* gray-300 */
+    border-radius: 999px;
+    outline: none;
+}
+
+/* Track */
+.price-range::-webkit-slider-runnable-track {
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 999px;
+}
+
+/* Thumb */
+.price-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #2563eb;
+    /* blue-600 */
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+    /* CỰC QUAN TRỌNG */
+}
+
+/* ================= PAGINATION UI FIX ================= */
+::ng-deep .ant-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+::ng-deep .ant-pagination ul {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+::ng-deep .ant-pagination ul li button {
+    background-color: white;
+    border: none;
+}
+
+::ng-deep .ant-pagination-item,
+::ng-deep .ant-pagination-prev,
+::ng-deep .ant-pagination-next {
+    min-width: 36px !important;
+    height: 36px;
+    border-radius: 9999px;
+    border: 1px solid #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+::ng-deep .ant-pagination-item a {
+    color: #374151;
+    font-weight: 500;
+}
+
+::ng-deep .ant-pagination-item:hover,
+::ng-deep .ant-pagination-prev:hover,
+::ng-deep .ant-pagination-next:hover {
+    border-color: #2563eb;
+}
+
+::ng-deep .ant-pagination-item:hover a {
+    color: #2563eb;
+}
+
+::ng-deep .ant-pagination-item-active {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+::ng-deep .ant-pagination-item-active a {
+    color: #fff;
+}
+
+/* disable */
+::ng-deep .ant-pagination-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}

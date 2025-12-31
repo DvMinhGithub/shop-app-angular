@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { OrderService } from 'src/app/core/services/order.service'
-import { IOrderResponse } from 'src/app/shared/models/order'
-import { IPagination } from 'src/app/shared/models/request'
+import { IOrderResponse } from 'src/app/shared/models/interface/order'
+import { IPagination } from 'src/app/shared/models/interface/request'
 
 @Component({
   selector: 'app-admin-order-detail',

@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { headersApi, orderApi } from 'src/app/constant/api'
-import { IOrderCreateRequest, IOrderResponse, TPaginatedOrderResponse } from 'src/app/shared/models/order'
-import { IPagination } from 'src/app/shared/models/request'
-import { IApiResponse } from 'src/app/shared/models/response'
+import { IOrderCreateRequest, IOrderResponse, TPaginatedOrderResponse } from 'src/app/shared/models/interface/order'
+import { IPagination } from 'src/app/shared/models/interface/request'
+import { IApiResponse } from 'src/app/shared/models/interface/response'
 
 @Injectable({
   providedIn: 'root'

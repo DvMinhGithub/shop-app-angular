@@ -9,25 +9,41 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('./features/home/home.module').then((m) => m.HomeModule)
+        loadChildren: () => import('./features/user/home/home.module').then((m) => m.HomeModule)
+      },
+      {
+        path: 'introduce',
+        loadChildren: () => import('./features/user/introduce/introduce.module').then((m) => m.IntroduceModule)
+      },
+      {
+        path: 'color',
+        loadChildren: () => import('./features/user/color/color.module').then((m) => m.ColorModule)
       },
       {
         path: 'product',
-        loadChildren: () => import('./features/products/products.module').then((m) => m.ProductsModule)
+        loadChildren: () => import('./features/user/product/product.module').then((m) => m.ProductModule)
       },
       {
-        path: 'cart',
-        loadChildren: () => import('./features/cart/cart.module').then((m) => m.CartModule)
+        path: 'house-designs',
+        loadChildren: () => import('./features/user/house-designs/house-designs.module').then((m) => m.HouseDesignsModule)
       },
       {
-        path: 'orders',
-        loadChildren: () => import('./features/orders/orders.module').then((m) => m.OrdersModule)
+        path: 'customer',
+        loadChildren: () => import('./features/user/customer/customer.module').then((m) => m.CustomerModule)
       },
       {
-        path: 'auth',
-        loadChildren: () => import('./features/auth/auth.module').then((m) => m.AuthModule)
-      }
+        path: 'news',
+        loadChildren: () => import('./features/user/news/news.module').then((m) => m.NewsModule)
+      },
+      {
+        path: 'contact',
+        loadChildren: () => import('./features/user/contact/contact.module').then((m) => m.ContactModule)
+      },
     ]
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./features/auth/auth.module').then((m) => m.AuthModule)
   },
   {
     path: 'admin',
@@ -39,4 +55,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {} 
+export class AppRoutingModule { } 

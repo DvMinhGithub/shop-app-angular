@@ -1,0 +1,284 @@
+<div class="home-page">
+
+  <!-- ================= BANNER ================= -->
+  <div class="h-[450px] w-full overflow-hidden" *ngIf="carouselReady">
+    <nz-carousel nzAutoPlay nzEffect="fade" [nzAutoPlaySpeed]="6000" [nzTransitionSpeed]="1500" [nzDots]="false"
+      class="h-full">
+
+      <div nz-carousel-content *ngFor="let img of images">
+        <img [src]="img" class="w-full h-full object-cover block" alt="banner" />
+      </div>
+    </nz-carousel>
+  </div>
+
+  <div class="home-content">
+
+    <!-- ================= VIDEO ================= -->
+    <div appLazyLoad (visible)="onVideoVisible($event)" class="lazy-section bg-white" [class.show]="showVideoSection">
+
+      <div class="px-4 md:px-8 lg:px-12 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <div *ngFor="let video of videoList" (click)="openVideo(video.youtubeUrl)" class="group relative h-[400px] rounded-xl overflow-hidden cursor-pointer
+                   transition-transform duration-700 hover:scale-[1.03]">
+
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[1200ms]
+                     group-hover:scale-110" [style.backgroundImage]="'url(' + video.thumbnail + ')'">
+            </div>
+
+            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/55 transition"></div>
+
+            <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+              <div class="w-20 h-20 rounded-full border-4 border-yellow-400 text-yellow-400
+                       flex items-center justify-center text-2xl
+                       transition-all duration-500
+                       group-hover:bg-yellow-400 group-hover:text-black group-hover:scale-110">
+                ▶
+              </div>
+
+              <h3 class="mt-6 text-2xl font-bold text-yellow-400 uppercase">
+                {{ video.title }}
+              </h3>
+
+              <p class="text-lg text-yellow-300">
+                {{ video.subTitle }}
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div *ngIf="showVideo" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+        <div class="relative h-[500px] w-[90%] md:w-[900px] aspect-video bg-black rounded-xl overflow-hidden">
+          <button (click)="closeVideo()" class="absolute top-3 right-4 text-white text-3xl z-10">✕</button>
+          <iframe class="w-full h-full" [src]="videoUrl" frameborder="0" allow="autoplay; encrypted-media"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= BANNER CONTENT ================= -->
+    <div appLazyLoad (visible)="onBannerVisible($event)" class="lazy-section bg-white" [class.show]="showBannerContent">
+
+      <div class="max-w-[1360px] mx-auto px-4 md:px-8 lg:px-12 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <div *ngFor="let item of bannerList" class="group relative h-[300px] rounded-xl overflow-hidden cursor-pointer
+                   transition-transform duration-700 hover:scale-[1.03]">
+
+            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[1200ms]
+                     group-hover:scale-110" [style.backgroundImage]="'url(' + item.image + ')'">
+            </div>
+
+            <div class="absolute inset-0 bg-black/30 group-hover:bg-black/45 transition"></div>
+
+            <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
+              <h4 class="text-lg uppercase text-yellow-400">{{ item.title }}</h4>
+              <h2 class="text-3xl font-bold uppercase text-yellow-400 mt-1">
+                {{ item.subTitle }}
+              </h2>
+
+              <a [routerLink]="item.link" class="mt-8 inline-block px-8 py-3 rounded-full border-2 border-yellow-400
+                       text-yellow-400 font-semibold uppercase
+                       transition-all duration-500
+                       group-hover:bg-yellow-400 group-hover:text-black">
+                {{ item.buttonText }}
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= BANNER2 ================= -->
+    <div class="h-[450px] w-full overflow-hidden" *ngIf="carousel2Ready">
+      <nz-carousel nzAutoPlay nzEffect="fade" [nzAutoPlaySpeed]="6000" [nzTransitionSpeed]="1500" [nzDots]="false"
+        class="h-full">
+
+        <div nz-carousel-content *ngFor="let img of images2">
+          <img [src]="img" class="w-full h-full object-cover block" alt="banner" />
+        </div>
+      </nz-carousel>
+    </div>
+
+    <!-- ===== CONTACT INFO BLOCK ===== -->
+    <div appLazyLoad (visible)="onInfoVisible($event)" class="lazy-section bg-white p-16 pb-0" [class.show]="showInfo">
+
+      <div class="max-w-[1360px] mx-auto px-4 md:px-8 lg:px-12">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+
+          <!-- ===== ĐỊA CHỈ ===== -->
+          <div class="flex flex-col items-center">
+
+            <img src="https://sontadapha.com/wp-content/uploads/2019/05/icon-vi-tri.png" alt="Địa chỉ"
+              class="w-[46px] h-auto mb-4" />
+
+            <h3 class="text-lg font-semibold uppercase mb-2">
+              Địa chỉ
+            </h3>
+
+            <p class="text-gray-600 leading-relaxed">
+              Số 112, Đường số 9, Phường 9, Quận Gò Vấp, Thành phố Hồ Chí Minh
+            </p>
+
+          </div>
+
+          <!-- ===== ĐIỆN THOẠI ===== -->
+          <div class="flex flex-col items-center">
+
+            <img src="https://sontadapha.com/wp-content/uploads/2019/05/icon-dien-thoai-2.png" alt="Điện thoại"
+              class="w-[92px] h-auto mb-4" />
+
+            <h3 class="text-lg font-semibold uppercase mb-2">
+              Điện thoại
+            </h3>
+
+            <p class="text-gray-600">
+              Điện thoại: (028) 6256 7842
+            </p>
+
+            <p class="text-gray-600">
+              (028) 6256 7841 | Fax: (028) 6256 8242
+            </p>
+
+          </div>
+
+          <!-- ===== EMAIL ===== -->
+          <div class="flex flex-col items-center">
+
+            <img src="https://sontadapha.com/wp-content/uploads/2019/05/icon-email-1-1.png" alt="Email"
+              class="w-[84px] h-auto mb-4" />
+
+            <h3 class="text-lg font-semibold uppercase mb-2">
+              Email
+            </h3>
+
+            <p class="text-gray-600">
+              tandaiphatsg@gmail.com
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= CTA ================= -->
+    <div appLazyLoad (visible)="onCTAVisible($event)" class="lazy-section" [class.show]="showCTA">
+
+      <div class="py-16 bg-white text-center">
+        <a [routerLink]="['/he-thong-chi-nhanh']" class="inline-flex items-center gap-3
+         px-10 py-4
+         rounded-full
+         border-2 border-solid border-yellow-500
+         text-yellow-500 uppercase font-semibold
+         bg-transparent
+         transition-all duration-500
+         hover:bg-yellow-500 hover:text-black
+         hover:scale-105 hover:shadow-lg">
+          <span>Hệ thống chi nhánh</span>
+          <span class="text-xl">→</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ================= PARTNER ================= -->
+    <div appLazyLoad (visible)="onPartnerVisible($event)" class="lazy-section" [class.show]="showPartner">
+
+      <div class="pb-16 bg-white">
+        <div class="w-full flex items-center justify-center gap-4 my-8">
+          <div class="flex-1 h-[1px] bg-blue-800 opacity-30"></div>
+
+          <h3 class="text-center text-blue-800 font-semibold uppercase tracking-wide">
+            ĐỐI TÁC CỦA TADAPHA
+          </h3>
+
+          <div class="flex-1 h-[1px] bg-blue-800 opacity-30"></div>
+        </div>
+
+
+        <div class="max-w-[1360px] mx-auto px-4 overflow-hidden">
+          <div class="logo-track">
+            <div class="logo-item" *ngFor="let logo of loopLogos">
+              <img [src]="logo" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div appLazyLoad (visible)="onContactVisible($event)" class="lazy-section bg-black" [class.show]="showContact"
+      class="pt-16 pb-16 relative bg-cover bg-center"
+      [ngStyle]="{'background-image': 'url(https://sontadapha.com/wp-content/uploads/2019/05/son-tadapha-16.jpg)'}">
+
+      <!-- Tiêu đề chính -->
+      <div class="text-center mb-12">
+        <h2 class="text-2xl font-bold text-yellow-500 uppercase mb-6 text-center">
+          LIÊN HỆ TADAPHA
+        </h2>
+      </div>
+
+      <!-- Nội dung 2 cột -->
+      <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+
+        <!-- Cột 1: Facebook Page -->
+        <div class="flex justify-center md:justify-start border-2 border-solid border-yellow-500">
+          <div class="w-full md:w-[400px] h-[200px]">
+            <div class="fb-page w-full cursor-pointer" data-href="https://www.facebook.com/SonTadapha/"
+              data-tabs="timeline" data-width="400" data-height="300" data-small-header="false"
+              data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+            </div>
+          </div>
+        </div>
+
+        <!-- Cột 2: Contact Form -->
+        <div class="flex justify-center md:justify-end">
+          <form class="w-full max-w-md space-y-4 bg-white p-6 rounded-lg shadow-md">
+            <input type="text" name="your-name" placeholder="Tên của bạn (*)"
+              class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              required style="width: -webkit-fill-available;">
+
+            <input type="email" name="your-email" placeholder="Địa chỉ Email (*)"
+              class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              required style="width: -webkit-fill-available;">
+
+            <textarea name="your-message" rows="6" placeholder="Nội dung liên hệ (*)"
+              class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              required style="width: -webkit-fill-available;"></textarea>
+
+            <button type="submit" class="w-full bg-yellow-500 text-black font-semibold uppercase rounded-full py-3
+                       border-2 border-solid border-yellow-500
+                       transition-all duration-300 hover:bg-black hover:text-yellow-500 cursor-pointer">
+              GỬI ĐI
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- KHỐI GOOGLE MAPS RIÊNG -->
+    <div appLazyLoad (visible)="onMapVisible($event)" class="lazy-section bg-gray-50 py-16" [class.show]="showMap">
+      <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+
+        <h2 class="text-2xl font-bold text-yellow-500 uppercase mb-6 text-center">
+          ĐỊA CHỈ TADAPHA
+        </h2>
+
+        <div class="w-full h-96 md:h-[500px] rounded-lg overflow-hidden shadow-md">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d74571.14128545398!2d106.61994594025629!3d10.79901124273675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529a2c6cc0af5%3A0x5534a725852818e5!2zQ8O0bmcgVHkgVG5oaCBT4bqjbiBYdeG6pXQgWMOieSBE4buxbmcgVG0gROG7i2NoIFbhu6UgVMOibiDEkOG6oWkgUGjDoXQ!5e0!3m2!1svi!2s!4v1557455556102!5m2!1svi!2s"
+            width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<div class="product-page max-w-7xl mx-auto px-4 py-6 text-gray-900">
+  <div class="flex flex-col lg:flex-row gap-6">
+
+    <!-- FILTER -->
+    <aside class="w-full lg:w-[30%] bg-white border border-solid border-gray-200 rounded-xl p-6 min-h-[420px]">
+      <h2 class="text-lg font-semibold mb-6">Filter</h2>
+
+      <!-- CATEGORY -->
+      <div class="mb-8">
+        <h3 class="text-sm font-semibold mb-4 text-gray-700 uppercase">
+          Category
+        </h3>
+
+        <label *ngFor="let c of categories"
+               class="flex items-center gap-3 mb-3 cursor-pointer text-gray-700">
+          <input type="checkbox"
+                 class="w-4 h-4 border rounded accent-blue-600"
+                 [checked]="selectedCategories.includes(c)"
+                 (change)="toggleCategory(c)" />
+          <span class="text-sm">{{ c }}</span>
+        </label>
+      </div>
+
+      <!-- PRICE -->
+      <div>
+        <h3 class="text-sm font-semibold mb-4 text-gray-700 uppercase">
+          Price range
+        </h3>
+
+        <label class="text-xs text-gray-500">
+          {{ priceMin }}$
+        </label>
+        <input type="range"
+               min="0"
+               max="500"
+               step="10"
+               [(ngModel)]="priceMin"
+               (change)="applyFilter()"
+               class="w-full accent-blue-600" />
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <section class="w-full lg:w-[70%] flex flex-col gap-6">
+
+      <!-- TITLE -->
+      <h1 class="text-2xl font-bold">
+        PRODUCT
+      </h1>
+
+      <!-- TAB -->
+      <div class="flex flex-wrap gap-2">
+        <button *ngFor="let tab of tabs"
+                (click)="selectTab(tab)"
+                class="px-4 py-2 rounded-full border text-sm transition"
+                [ngClass]="{
+                  'bg-blue-600 text-white border-blue-600': selectedTab === tab,
+                  'bg-white text-gray-700 border-gray-300 hover:border-blue-500': selectedTab !== tab
+                }">
+          {{ tab }}
+        </button>
+      </div>
+
+      <!-- GRID -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <nz-card *ngFor="let p of pagedProducts"
+                 class="rounded-xl bg-white shadow-sm border border-solid"
+                 [nzHoverable]="true">
+
+          <img [src]="p.image"
+               alt="{{ p.name }}"
+               class="w-full h-48 object-cover rounded-lg mb-3" />
+
+          <h3 class="font-semibold text-gray-900">
+            {{ p.name }}
+          </h3>
+
+          <div class="flex justify-between items-center mt-2">
+            <span class="text-blue-600 font-semibold">
+              {{ p.price }}$
+            </span>
+
+            <button nz-button nzType="primary" nzSize="small">
+              Add
+            </button>
+          </div>
+        </nz-card>
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="flex justify-center pt-6">
+        <nz-pagination
+          [nzPageIndex]="pageIndex"
+          [nzPageSize]="pageSize"
+          [nzTotal]="total"
+          [nzShowSizeChanger]="false"
+          (nzPageIndexChange)="onPageChange($event)">
+        </nz-pagination>
+      </div>
+
+    </section>
+  </div>
+</div>

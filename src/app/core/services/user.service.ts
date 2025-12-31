@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { userApi, headersApi } from 'src/app/constant/api'
-import { IApiResponse } from 'src/app/shared/models/response'
-import { ILoginRequest, ILoginResponse, IRegisterRequest, IUser } from 'src/app/shared/models/user'
+import { IApiResponse } from 'src/app/shared/models/interface/response'
+import { ILoginRequest, ILoginResponse, IRegisterRequest, IUser } from 'src/app/shared/models/interface/user'
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class UserService {
     return this.http.get<IApiResponse<IUser>>(userApi.details, { headers: headersApi() })
   }
 
-  getUser(): IUser {
+  getUser(): IUser | null {
     const user = localStorage.getItem('user')
     return user ? JSON.parse(user) : null
   }

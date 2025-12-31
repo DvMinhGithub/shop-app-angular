@@ -1,6 +1,6 @@
 import { HttpHeaders } from '@angular/common/http'
-import { IListProductsRequest } from '../shared/models/product'
-import { IPagination } from '../shared/models/request'
+import { IListProductsRequest } from '../shared/models/interface/product'
+import { IPagination } from '../shared/models/interface/request'
 
 export const Url = 'http://localhost:8080/api/v1'
 
