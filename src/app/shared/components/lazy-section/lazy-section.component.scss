@@ -3,7 +3,6 @@
   --lazy-duration: 1.1s;
   --lazy-delay: 0s;
 
-  display: block; // Ensure the custom element behaves like a block/section
   opacity: 0;
   transform: translateY(var(--lazy-translate-y));
   transition:

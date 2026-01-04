@@ -2,7 +2,7 @@
 
 /* Base Styles */
 body {
-  @apply font-sans leading-relaxed text-white bg-gray-100;
+  @apply font-sans leading-relaxed text-black bg-gray-100;
 }
 
 /* Headings */

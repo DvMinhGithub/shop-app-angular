@@ -25,7 +25,8 @@ const routes: Routes = [
       },
       {
         path: 'house-designs',
-        loadChildren: () => import('./features/user/house-designs/house-designs.module').then((m) => m.HouseDesignsModule)
+        loadChildren: () =>
+          import('./features/user/house-designs/house-designs.module').then((m) => m.HouseDesignsModule)
       },
       {
         path: 'customer',
@@ -39,6 +40,10 @@ const routes: Routes = [
         path: 'contact',
         loadChildren: () => import('./features/user/contact/contact.module').then((m) => m.ContactModule)
       },
+      {
+        path: 'about',
+        loadChildren: () => import('./features/user/about/about.module').then((m) => m.AboutModule)
+      }
     ]
   },
   {
@@ -55,4 +60,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { } 
+export class AppRoutingModule {}
