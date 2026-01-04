@@ -1,0 +1,23 @@
+.lazy-section {
+  --lazy-translate-y: 60px;
+  --lazy-duration: 1.1s;
+  --lazy-delay: 0s;
+
+  display: block; // Ensure the custom element behaves like a block/section
+  opacity: 0;
+  transform: translateY(var(--lazy-translate-y));
+  transition:
+    opacity var(--lazy-duration) ease var(--lazy-delay),
+    transform var(--lazy-duration) ease var(--lazy-delay);
+
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.lazy-section.show {
+  opacity: 1;
+  transform: translateY(0);
+
+  pointer-events: auto;
+  visibility: visible;
+}

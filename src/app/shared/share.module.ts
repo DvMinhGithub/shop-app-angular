@@ -11,6 +11,8 @@ import { SearchInputComponent } from './ui/search-input/search-input.component'
 import { SelectFilterComponent } from './ui/select-filter/select-filter.component';
 import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 import { NewsletterSubscriptionComponent } from './ui/newsletter-subscription/newsletter-subscription.component'
+import { LazyLoadDirective } from './directives/lazyLoadDirective';
+import { LazySectionComponent } from './components/lazy-section/lazy-section.component'
 
 @NgModule({
   declarations: [
@@ -18,12 +20,13 @@ import { NewsletterSubscriptionComponent } from './ui/newsletter-subscription/ne
     ProductCardComponent,
     ProductCardSkeletonComponent,
     ButtonComponent,
-    ButtonComponent,
     FadeInDirective,
     SearchInputComponent,
     SelectFilterComponent,
     SearchFilterComponent,
-    NewsletterSubscriptionComponent
+    NewsletterSubscriptionComponent,
+    LazyLoadDirective,
+    LazySectionComponent
   ],
   imports: [CommonModule, RouterModule, FormsModule],
   exports: [
@@ -37,7 +40,9 @@ import { NewsletterSubscriptionComponent } from './ui/newsletter-subscription/ne
     SearchInputComponent,
     SelectFilterComponent,
     SearchFilterComponent,
-    NewsletterSubscriptionComponent
+    NewsletterSubscriptionComponent,
+    LazySectionComponent,
+    LazyLoadDirective
   ]
 })
-export class SharedModule {}
+export class SharedModule { }

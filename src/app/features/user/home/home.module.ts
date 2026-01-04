@@ -4,10 +4,9 @@ import { SharedModule } from 'src/app/shared/share.module'
 import { HomeComponent } from './home.component'
 import { HomeRoutingModule } from './home-routing.module';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
-import { LazyLoadDirective } from 'src/app/shared/directives/lazyLoadDirective';
 
 @NgModule({
-  declarations: [HomeComponent, LazyLoadDirective],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
     SharedModule,

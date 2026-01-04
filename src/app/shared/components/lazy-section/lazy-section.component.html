@@ -1,0 +1,9 @@
+<section
+  appLazyLoad
+  (visible)="onVisible($event)"
+  class="lazy-section"
+  [class.show]="visible"
+  [ngClass]="hostClasses"
+>
+  <ng-content></ng-content>
+</section>

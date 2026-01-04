@@ -14,7 +14,7 @@
   <div class="home-content">
 
     <!-- ================= VIDEO ================= -->
-    <div appLazyLoad (visible)="onVideoVisible($event)" class="lazy-section bg-white" [class.show]="showVideoSection">
+    <app-lazy-section class="bg-white">
 
       <div class="px-4 md:px-8 lg:px-12 py-16">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -57,7 +57,7 @@
           </iframe>
         </div>
       </div>
-    </div>
+    </app-lazy-section>
 
     <!-- ================= BANNER CONTENT ================= -->
     <div appLazyLoad (visible)="onBannerVisible($event)" class="lazy-section bg-white" [class.show]="showBannerContent">

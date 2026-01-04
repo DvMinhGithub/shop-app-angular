@@ -47,18 +47,6 @@ nz-carousel,
   transform: scale(1.05);
 }
 
-.lazy-section {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: all 1.1s ease;
-}
-
-.lazy-section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
 /* ===== ANIMATION ===== */
 
 @keyframes scroll-logo {

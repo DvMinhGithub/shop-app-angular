@@ -1,16 +1,18 @@
-import { Directive, ElementRef, EventEmitter, Output, AfterViewInit } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Output, AfterViewInit, OnDestroy } from '@angular/core';
 
 @Directive({
   selector: '[appLazyLoad]'
 })
-export class LazyLoadDirective implements AfterViewInit {
+export class LazyLoadDirective implements AfterViewInit, OnDestroy {
 
   @Output() visible = new EventEmitter<boolean>();
 
+  private observer: IntersectionObserver | undefined;
+
   constructor(private el: ElementRef) { }
 
-  ngAfterViewInit(): void {
-    const observer = new IntersectionObserver(
+  ngAfterViewInit() {
+    this.observer = new IntersectionObserver(
       ([entry]) => {
         this.visible.emit(entry.isIntersecting); // emit true/false
       },
@@ -20,6 +22,17 @@ export class LazyLoadDirective implements AfterViewInit {
       }
     );
 
-    observer.observe(this.el.nativeElement);
+    this.observer.observe(this.el.nativeElement);
+  }
+
+  disconnect() {
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = undefined;
+    }
+  }
+
+  ngOnDestroy() {
+    this.disconnect();
   }
 }
