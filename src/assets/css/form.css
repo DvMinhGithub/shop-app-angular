@@ -17,3 +17,7 @@ p {
 .btn {
   @apply border-2 border-black px-8 py-2 transition-all hover:bg-black hover:text-white;
 }
+
+.border-error {
+  @apply border-red-500;
+}

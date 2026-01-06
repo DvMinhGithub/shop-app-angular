@@ -6,6 +6,7 @@ import { IContactRequest } from 'src/app/shared/models/interface/request'
 import { finalize } from 'rxjs/operators'
 import { IApiResponse } from 'src/app/shared/models/interface/response'
 type ValidationMessages = Record<string, Record<string, string>>
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -28,7 +29,6 @@ export class ContactComponent {
     })
   }
 
-  // Trong component.ts - thêm getter
   get nameControl() {
     return this.contactForm.get('name')
   }
