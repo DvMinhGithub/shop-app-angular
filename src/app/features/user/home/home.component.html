@@ -1,5 +1,5 @@
 <!-- Hero Section -->
-<div class="container pt-20">
+<app-lazy-section class="container pt-20">
   <div class="flex flex-col-reverse items-center justify-between max-md:gap-5 md:flex-row">
     <div class="flex w-full flex-col gap-5 md:w-1/4 md:gap-10">
       <h1 class="mb-4 text-4xl font-bold">PaintPalette: Your go-to paint supplier</h1>
@@ -22,10 +22,10 @@
       </div>
     </ng-container>
   </div>
-</div>
+</app-lazy-section>
 
 <!-- Commitment Section -->
-<section class="w-full border-t border-gray-500 bg-white">
+<app-lazy-section class="w-full border-t border-gray-500 bg-white">
   <div class="container py-20">
     <div class="flex flex-col items-center gap-12 md:flex-row lg:gap-20">
       <div class="aspect-square w-full md:w-1/2">
@@ -48,20 +48,20 @@
       </div>
     </div>
   </div>
-</section>
+</app-lazy-section>
 
 <!-- Quality Section -->
-<section class="w-full border-t border-gray-500 bg-white py-24">
+<app-lazy-section class="w-full border-t border-gray-500 bg-white py-24">
   <div class="container py-20 text-center">
     <h2 class="mb-8 text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">Quality Assurance</h2>
     <p class="mx-auto max-w-2xl text-xl font-light italic leading-relaxed text-gray-600 md:text-2xl">
       We prioritize customer satisfaction with our top-notch products.
     </p>
   </div>
-</section>
+</app-lazy-section>
 
 <!-- Innovation Section -->
-<section class="border-t border-gray-500 bg-white">
+<app-lazy-section class="border-t border-gray-500 bg-white">
   <div class="container mx-auto py-20">
     <div class="flex flex-col items-center md:flex-row md:gap-12 lg:gap-20">
       <div class="mb-8 w-full md:mb-0 md:w-6/12">
@@ -80,10 +80,10 @@
       </div>
     </div>
   </div>
-</section>
+</app-lazy-section>
 
 <!-- Trusted by -->
-<div class="border-t border-gray-500 pb-10 pt-5 md:pb-16">
+<app-lazy-section class="border-t border-gray-500 pb-10 pt-5 md:pb-16">
   <h3 class="mb-10 text-center text-4xl font-semibold md:mb-5">Trusted by</h3>
   <div class="flex flex-col justify-center gap-12 max-md:items-center md:flex-row">
     <ng-container *ngFor="let brand of brandList">
@@ -92,4 +92,4 @@
       </div>
     </ng-container>
   </div>
-</div>
+</app-lazy-section>
