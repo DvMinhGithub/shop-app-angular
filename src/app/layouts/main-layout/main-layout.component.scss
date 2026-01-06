@@ -24,13 +24,6 @@ app-header {
   padding: 0;
 }
 
-app-footer {
-  flex: 0 0 60px;
-  background-color: white;
-  text-align: center;
-  line-height: 60px;
-}
-
 /* custom button back-top góc dưới phải */
 .back-top-button {
   position: fixed;
@@ -44,7 +37,7 @@ app-footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: background-color 0.2s;
   z-index: 99999999999999;
