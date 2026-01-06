@@ -1,19 +1,17 @@
-import { Component, OnInit } from '@angular/core'
-import { Product } from './models/interface'
-import { mockImage } from './models/constant'
-import { LoadingService } from 'src/app/shared/services/loading.service'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { finalize, Subject, takeUntil } from 'rxjs'
 import { ProductService } from './service/product.service'
+import { LoadingService } from 'src/app/shared/services/loading.service'
+import { IProduct } from './models/interface'
+import { MOCK_PRODUCTS } from './models/constant'
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit {
-
-  public ngUnsubscribe = new Subject();
-
+export class ProductComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>()
 
   // TAB
   tabs = ['All', 'New', 'Popular', 'Sale']
@@ -28,9 +26,8 @@ export class ProductComponent implements OnInit {
   priceMax = 500
 
   // DATA
-  allProducts: Product[] = []
-  filteredProducts: Product[] = []
-  pagedProducts: Product[] = []
+  allProducts: IProduct[] = []
+  pagedProducts: IProduct[] = []
 
   // PAGINATION
   pageIndex = 1
@@ -38,109 +35,104 @@ export class ProductComponent implements OnInit {
   total = 0
 
   constructor(
-    private loadingService: LoadingService,
     private productService: ProductService,
-  ) {
-
-  }
+    private loadingService: LoadingService
+  ) {}
 
   ngOnInit(): void {
-    this.mockAllProducts()
-    this.applyAllFilters()
+    this.getProduct()
   }
 
-  getProduct() {
+  ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete()
+  }
+
+  // ================= API + MOCK FALLBACK =================
+  getProduct(): void {
+    const params = {
+      page: this.pageIndex,
+      size: this.pageSize,
+      tab: this.selectedTab !== 'All' ? this.selectedTab : null,
+      categories: this.selectedCategories,
+      priceMin: this.priceMin,
+      priceMax: this.priceMax
+    }
 
     this.loadingService.show()
-    this.productService.getProduct('params').pipe(
-      finalize(() => { this.loadingService.hide() }),
-      takeUntil(this.ngUnsubscribe),
-    ).subscribe({
-      next: (res) => {
-        console.log('SUCCESS', res);
-      },
-      error: (err) => {
-        // console.error('ERROR', err);
-      }
-    }
-    )
+
+    this.productService
+      .getProduct(params)
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => this.loadingService.hide())
+      )
+      .subscribe({
+        next: (res) => {
+          // 🔥 FALLBACK MOCK
+          const data = res?.data?.length ? res.data : MOCK_PRODUCTS
+
+          this.applyFilterAndPaging(data)
+        },
+        error: () => {
+          // 🔥 API lỗi → dùng mock
+          this.applyFilterAndPaging(MOCK_PRODUCTS)
+        }
+      })
   }
 
-  // ---------- TAB ----------
-  selectTab(tab: string) {
+  // ================= FILTER + PAGING CORE =================
+  applyFilterAndPaging(data: IProduct[]): void {
+    let result = [...data]
+
+    // TAB (demo)
+    if (this.selectedTab !== 'All') {
+      result = result.filter((_, i) => i % 2 === 0)
+    }
+
+    // CATEGORY
+    if (this.selectedCategories.length) {
+      result = result.filter((p) => this.selectedCategories.includes(p.category))
+    }
+
+    // PRICE
+    result = result.filter((p) => p.price >= this.priceMin && p.price <= this.priceMax)
+
+    this.total = result.length
+
+    const start = (this.pageIndex - 1) * this.pageSize
+    const end = start + this.pageSize
+    this.pagedProducts = result.slice(start, end)
+  }
+
+  // ================= UI EVENTS =================
+  selectTab(tab: string): void {
     this.selectedTab = tab
     this.resetPage()
   }
 
-  // ---------- CATEGORY ----------
-  toggleCategory(category: string) {
+  toggleCategory(category: string): void {
     this.selectedCategories.includes(category)
-      ? this.selectedCategories = this.selectedCategories.filter(c => c !== category)
+      ? (this.selectedCategories = this.selectedCategories.filter((c) => c !== category))
       : this.selectedCategories.push(category)
 
     this.resetPage()
   }
 
-  // ---------- PRICE ----------
-  applyFilter() {
+  applyFilter(): void {
     if (this.priceMin > this.priceMax) {
-      [this.priceMin, this.priceMax] = [this.priceMax, this.priceMin]
+      ;[this.priceMin, this.priceMax] = [this.priceMax, this.priceMin]
     }
     this.resetPage()
   }
 
-  // ---------- PAGINATION ----------
-  onPageChange(page: number) {
+  onPageChange(page: number): void {
     this.pageIndex = page
-    this.updatePagedProducts()
+    this.getProduct()
   }
 
-  resetPage() {
+  resetPage(): void {
     this.pageIndex = 1
-    this.applyAllFilters()
-  }
-
-  // ---------- FILTER CORE ----------
-  applyAllFilters() {
-    let result = [...this.allProducts]
-
-    // Category
-    if (this.selectedCategories.length) {
-      result = result.filter(p =>
-        this.selectedCategories.includes(p.category)
-      )
-    }
-
-    // Price
-    result = result.filter(p =>
-      p.price >= this.priceMin && p.price <= this.priceMax
-    )
-
-    // Tab demo
-    if (this.selectedTab !== 'All') {
-      result = result.slice(0, 12)
-    }
-
-    this.filteredProducts = result
-    this.total = result.length
-
-    this.updatePagedProducts()
-  }
-
-  updatePagedProducts() {
-    const start = (this.pageIndex - 1) * this.pageSize
-    const end = start + this.pageSize
-    this.pagedProducts = this.filteredProducts.slice(start, end)
-  }
-
-  // ---------- MOCK DATA ----------
-  mockAllProducts() {
-    this.allProducts = Array.from({ length: 30 }).map((_, i) => ({
-      id: i + 1,
-      name: `Product ${i + 1}`,
-      price: Math.floor(Math.random() * 500),
-      category: this.categories[i % this.categories.length],
-      image: mockImage[i % mockImage.length]
-    }))
+    this.getProduct()
   }
 }
