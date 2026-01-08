@@ -1,42 +1,49 @@
 <div class="product-page mx-auto max-w-7xl px-4 py-6 text-gray-900">
   <div class="flex flex-col gap-6 lg:flex-row">
-    <!-- FILTER -->
+    <!-- ================= FILTER ================= -->
     <aside class="min-h-[420px] w-full rounded-xl border border-solid border-gray-200 bg-white p-6 lg:w-[30%]">
-      <h2 class="mb-6 text-lg font-semibold">Filter</h2>
+      <!-- Skeleton FILTER -->
+      <nz-skeleton *ngIf="loadingFilter" [nzActive]="true" [nzParagraph]="{ rows: 8 }"> </nz-skeleton>
 
-      <!-- CATEGORY -->
-      <div class="mb-8">
-        <h3 class="mb-4 text-sm font-semibold uppercase text-gray-700">Category</h3>
+      <!-- Real FILTER -->
+      <ng-container *ngIf="!loadingFilter">
+        <h2 class="mb-6 text-lg font-semibold">Filter</h2>
 
-        <label *ngFor="let c of categories" class="mb-3 flex cursor-pointer items-center gap-3 text-gray-700">
+        <!-- CATEGORY -->
+        <div class="mb-8">
+          <h3 class="mb-4 text-sm font-semibold uppercase text-gray-700">Category</h3>
+
+          <label *ngFor="let c of categories" class="mb-3 flex cursor-pointer items-center gap-3 text-gray-700">
+            <input
+              type="checkbox"
+              class="h-4 w-4 rounded border accent-blue-600"
+              [checked]="selectedCategories.includes(c)"
+              (change)="toggleCategory(c)"
+            />
+
+            <span class="text-sm">{{ c }}</span>
+          </label>
+        </div>
+
+        <!-- PRICE -->
+        <div>
+          <h3 class="mb-4 text-sm font-semibold uppercase text-gray-700">Price range</h3>
+
+          <label class="text-xs text-gray-500">{{ priceMin }}$</label>
           <input
-            type="checkbox"
-            class="h-4 w-4 rounded border accent-blue-600"
-            [checked]="selectedCategories.includes(c)"
-            (change)="toggleCategory(c)"
+            type="range"
+            min="0"
+            max="500"
+            step="10"
+            [(ngModel)]="priceMin"
+            (change)="applyFilter()"
+            class="w-full accent-blue-600"
           />
-          <span class="text-sm">{{ c }}</span>
-        </label>
-      </div>
-
-      <!-- PRICE -->
-      <div>
-        <h3 class="mb-4 text-sm font-semibold uppercase text-gray-700">Price range</h3>
-
-        <label class="text-xs text-gray-500"> {{ priceMin }}$ </label>
-        <input
-          type="range"
-          min="0"
-          max="500"
-          step="10"
-          [(ngModel)]="priceMin"
-          (change)="applyFilter()"
-          class="w-full accent-blue-600"
-        />
-      </div>
+        </div>
+      </ng-container>
     </aside>
 
-    <!-- CONTENT -->
+    <!-- ================= CONTENT ================= -->
     <section class="flex w-full flex-col gap-6 lg:w-[70%]">
       <!-- TITLE -->
       <h1 class="text-2xl font-bold">PRODUCT</h1>
@@ -58,25 +65,35 @@
 
       <!-- GRID -->
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <nz-card
-          *ngFor="let p of pagedProducts"
-          class="rounded-xl border border-solid bg-white shadow-sm"
-          [nzHoverable]="true"
-          [routerLink]="['detail']"
-          [queryParams]="{ id: p.id }"
-        >
-          <img [src]="p.image" alt="{{ p.name }}" class="mb-3 h-48 w-full rounded-lg object-cover" />
+        <!-- Skeleton cards -->
+        <ng-container *ngIf="loadingList">
+          <nz-card *ngFor="let _ of [1, 2, 3, 4, 5, 6]">
+            <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 3 }"> </nz-skeleton>
+          </nz-card>
+        </ng-container>
 
-          <h3 class="font-semibold text-gray-900">
-            {{ p.name }}
-          </h3>
+        <!-- Real cards -->
+        <ng-container *ngIf="!loadingList">
+          <nz-card
+            *ngFor="let p of pagedProducts"
+            class="rounded-xl border border-solid bg-white shadow-sm"
+            [nzHoverable]="true"
+            [routerLink]="['detail']"
+            [queryParams]="{ id: p.id }"
+          >
+            <img [src]="p.image" alt="{{ p.name }}" class="mb-3 h-48 w-full rounded-lg object-cover" />
 
-          <div class="mt-2 flex items-center justify-between">
-            <span class="font-semibold text-blue-600"> {{ p.price }}$ </span>
+            <h3 class="font-semibold text-gray-900">
+              {{ p.name }}
+            </h3>
 
-            <button nz-button nzType="primary" nzSize="small">Add</button>
-          </div>
-        </nz-card>
+            <div class="mt-2 flex items-center justify-between">
+              <span class="font-semibold text-blue-600"> {{ p.price }}$ </span>
+
+              <button nz-button nzType="primary" nzSize="small">Add</button>
+            </div>
+          </nz-card>
+        </ng-container>
       </div>
 
       <!-- PAGINATION -->

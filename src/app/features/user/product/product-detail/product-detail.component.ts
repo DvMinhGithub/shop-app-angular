@@ -7,12 +7,15 @@ import { PRODUCT_MOCK } from '../models/constant'
 
 @Component({
   selector: 'app-product-detail',
-  templateUrl: './product-detail.component.html'
+  templateUrl: './product-detail.component.html',
+  styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent extends ComponentBaseAbstract {
   product!: IProduct
 
-  // ===== Skeleton loading flags =====
+  visibleReviews = 3 // số review hiển thị ban đầu
+  reviewsStep = 3 // mỗi lần load thêm
+
   loadingProduct = true
   loadingRelated = true
   loadingReviews = true
@@ -35,10 +38,7 @@ export class ProductDetailComponent extends ComponentBaseAbstract {
       .pipe(
         takeUntil(this.ngUnsubscribe),
         finalize(() => {
-          // tắt spinner global
           this.loadingService.hide()
-
-          // tắt skeleton theo từng khối
           this.loadingProduct = false
           this.loadingRelated = false
           this.loadingReviews = false
@@ -47,13 +47,28 @@ export class ProductDetailComponent extends ComponentBaseAbstract {
       )
       .subscribe({
         next: (res) => {
-          // fallback mock nếu API trả null
           this.product = res?.data ?? PRODUCT_MOCK
         },
         error: () => {
-          // fallback toàn bộ khi lỗi API
           this.product = PRODUCT_MOCK
         }
       })
+  }
+
+  showMoreReviews(): void {
+    this.visibleReviews += this.reviewsStep
+  }
+
+  getTagColor(tag: string): string {
+    switch (tag) {
+      case 'NEW':
+        return 'green'
+      case 'GIẢM 5%':
+        return 'red'
+      case 'HOT':
+        return 'volcano'
+      default:
+        return 'blue'
+    }
   }
 }

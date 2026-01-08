@@ -14,9 +14,20 @@ export interface IProductReview {
   dislike: number
 }
 
+export interface IReviewSummary {
+  avg: number
+  total: number
+  stars: {
+    star: number
+    count: number
+    percent: number
+  }[]
+}
+
 export interface IProduct {
   id?: number
   name?: string
+  tag?: string
   price: number
   category: string
   shortDescription?: string
@@ -25,6 +36,7 @@ export interface IProduct {
   rating?: number
   viewCount?: number
   author?: string
+  reviewSummary?: IReviewSummary
   reviews?: IProductReview[]
   relatedProducts?: IProduct[]
 }

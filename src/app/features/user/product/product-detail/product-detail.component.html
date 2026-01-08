@@ -3,34 +3,49 @@
   <div class="grid grid-cols-12 gap-10">
     <!-- IMAGE -->
     <div class="col-span-12 lg:col-span-4">
-      <nz-skeleton *ngIf="loadingProduct" [nzActive]="true" [nzParagraph]="{ rows: 6 }"> </nz-skeleton>
+      <nz-skeleton *ngIf="loadingProduct" [nzActive]="true" [nzParagraph]="{ rows: 6 }"></nz-skeleton>
 
-      <img *ngIf="!loadingProduct" [src]="product?.image" class="w-full rounded-xl object-cover shadow-md" />
+      <img
+        *ngIf="!loadingProduct"
+        [src]="product.image"
+        class="w-full rounded-xl object-cover shadow-md transition-transform duration-300 ease-out"
+      />
     </div>
 
     <!-- CONTENT -->
     <div class="col-span-12 space-y-4 lg:col-span-8">
-      <nz-skeleton *ngIf="loadingProduct" [nzActive]="true" [nzTitle]="{ width: '60%' }" [nzParagraph]="{ rows: 5 }">
-      </nz-skeleton>
+      <nz-skeleton
+        *ngIf="loadingProduct"
+        [nzActive]="true"
+        [nzTitle]="{ width: '60%' }"
+        [nzParagraph]="{ rows: 5 }"
+      ></nz-skeleton>
 
       <ng-container *ngIf="!loadingProduct">
-        <h1 class="text-3xl font-semibold">{{ product?.name }}</h1>
-        <h2 class="text-gray-500">{{ product?.shortDescription }}</h2>
+        <h1 class="text-3xl font-semibold">{{ product.name }}</h1>
+        <h2 class="text-gray-500">{{ product.shortDescription }}</h2>
 
         <div class="flex items-center gap-6 text-sm text-gray-600">
-          <nz-rate [ngModel]="product?.rating" nzDisabled></nz-rate>
-          <span>{{ product?.author }}</span>
-          <span>{{ product?.viewCount }} lượt xem</span>
+          <nz-rate [ngModel]="product.rating" nzDisabled></nz-rate>
+          <span>{{ product.author }}</span>
+          <span>{{ product.viewCount }} lượt xem</span>
         </div>
 
         <p class="leading-relaxed text-gray-700">
-          {{ product?.description }}
+          {{ product.description }}
         </p>
 
         <div class="flex items-end justify-between pt-6">
           <div class="flex flex-col gap-3">
-            <button nz-button nzType="primary">Add to cart</button>
-            <button nz-button nzType="default">Wishlist</button>
+            <button nz-button nzType="primary">Add to cart</button> <button nz-button nzType="default">Wishlist</button>
+          </div>
+          <div class="flex-col">
+            <h1>Shop Now</h1>
+            <div class="flex">
+              <button class="mr-1" nz-button nzType="primary">Add to cart</button>
+              <button class="mr-1" nz-button nzType="default">Wishlist</button>
+              <button nz-button nzType="default">Compare</button>
+            </div>
           </div>
         </div>
       </ng-container>
@@ -38,23 +53,35 @@
   </div>
 
   <!-- ================= RELATED PRODUCTS ================= -->
-  <div>
-    <h2 class="mb-6 text-xl font-semibold">Recommended</h2>
+  <div class="rounded-md border p-6">
+    <h2 class="mb-6 text-xl font-semibold">Recommended for you</h2>
 
     <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
       <!-- Skeleton -->
       <ng-container *ngIf="loadingRelated">
         <nz-card *ngFor="let _ of [1, 2, 3, 4, 5, 6]">
-          <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 2 }"> </nz-skeleton>
+          <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 2 }"></nz-skeleton>
         </nz-card>
       </ng-container>
 
       <!-- Data -->
       <ng-container *ngIf="!loadingRelated">
-        <nz-card *ngFor="let item of product?.relatedProducts" nzHoverable>
-          <img [src]="item.image" class="mb-3 rounded-md" />
+        <nz-card *ngFor="let item of product.relatedProducts" nzHoverable class="group relative overflow-hidden">
+          <!-- TAG -->
+          <nz-tag *ngIf="item.tag" [nzColor]="getTagColor(item.tag)" class="absolute right-2 top-2 z-10">
+            {{ item.tag }}
+          </nz-tag>
+
+          <!-- IMAGE -->
+          <div class="mb-3 overflow-hidden rounded-md">
+            <img [src]="item.image" class="w-full transition-transform duration-300 ease-out group-hover:scale-105" />
+          </div>
+
+          <!-- NAME -->
           <h3 class="text-sm font-medium">{{ item.name }}</h3>
-          <button nz-button nzType="link" class="p-0">See more</button>
+
+          <!-- ACTION -->
+          <button nz-button nzType="primary" [routerLink]="" class="mt-2 p-0">See more</button>
         </nz-card>
       </ng-container>
     </div>
@@ -64,40 +91,67 @@
   <div>
     <h2 class="mb-6 text-xl font-semibold">Reviews</h2>
 
-    <div class="space-y-6">
-      <!-- Skeleton -->
-      <ng-container *ngIf="loadingReviews">
-        <div *ngFor="let _ of [1, 2, 3]" class="flex gap-4 border-b pb-4">
-          <nz-skeleton [nzActive]="true" [nzAvatar]="true" [nzParagraph]="{ rows: 3 }"> </nz-skeleton>
+    <!-- SUMMARY -->
+    <nz-skeleton *ngIf="loadingReviews" [nzActive]="true" [nzParagraph]="{ rows: 3 }"></nz-skeleton>
+
+    <ng-container *ngIf="!loadingReviews">
+      <div class="mb-10 flex items-start justify-center gap-12">
+        <!-- LEFT -->
+        <div class="flex min-w-[120px] flex-col items-start">
+          <div class="text-4xl font-semibold">{{ product.reviewSummary?.avg }} / 5</div>
+
+          <nz-rate [ngModel]="product.reviewSummary?.avg" nzDisabled nzAllowHalf class="mt-2"></nz-rate>
+
+          <div class="mt-1 text-sm text-gray-400">{{ product.reviewSummary?.total }} reviews</div>
         </div>
-      </ng-container>
 
-      <!-- Data -->
-      <ng-container *ngIf="!loadingReviews">
-        <div *ngFor="let r of product?.reviews" class="flex gap-4 border-b pb-4">
-          <img [src]="r.avatar" class="h-10 w-10 rounded-full" />
+        <!-- DIVIDER -->
+        <div class="w-px self-stretch bg-gray-300"></div>
 
-          <div class="flex-1 space-y-1">
-            <div class="flex items-center gap-3 text-sm">
-              <nz-rate [ngModel]="r.rating" nzDisabled></nz-rate>
-              <span class="text-gray-400">{{ r.createdAt }}</span>
+        <!-- RIGHT -->
+        <div class="w-72 space-y-2">
+          <div *ngFor="let star of product.reviewSummary?.stars" class="flex items-center gap-3 text-sm">
+            <div class="w-8 text-right">{{ star.star }}★</div>
+
+            <div class="h-2 flex-1 rounded bg-gray-200">
+              <div class="h-2 rounded bg-gray-700" [style.width.%]="star.percent"></div>
             </div>
-            <p class="text-gray-700">{{ r.comment }}</p>
+
+            <div class="w-8 text-right text-gray-500">
+              {{ star.count }}
+            </div>
           </div>
         </div>
-      </ng-container>
-    </div>
-  </div>
-
-  <!-- ================= ABOUT ================= -->
-  <app-lazy-section>
-    <nz-skeleton *ngIf="loadingAbout" [nzActive]="true" [nzParagraph]="{ rows: 4 }"> </nz-skeleton>
-
-    <div *ngIf="!loadingAbout" class="grid grid-cols-12 items-center gap-8">
-      <div class="col-span-12 lg:col-span-4">
-        <img src="https://picsum.photos/500/400" class="rounded-xl" />
       </div>
 
+      <!-- REVIEW LIST -->
+      <div class="space-y-8">
+        <div *ngFor="let r of product.reviews" class="flex gap-4 border-b pb-6">
+          <img [src]="r.avatar" class="h-10 w-10 rounded-full" />
+
+          <div class="flex-1">
+            <div class="mb-1 flex items-center justify-between">
+              <span class="text-sm font-medium">{{ r.userName }}</span>
+
+              <div class="flex items-center gap-3 text-sm">
+                <nz-rate [ngModel]="r.rating" nzDisabled></nz-rate>
+                <span class="text-gray-400">{{ r.createdAt }}</span>
+              </div>
+            </div>
+
+            <p class="text-sm text-gray-700">
+              {{ r.comment }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <app-lazy-section>
+    <nz-skeleton *ngIf="loadingAbout" [nzActive]="true" [nzParagraph]="{ rows: 4 }"> </nz-skeleton>
+    <div *ngIf="!loadingAbout" class="grid grid-cols-12 items-center gap-8">
+      <div class="col-span-12 lg:col-span-4"><img src="https://picsum.photos/500/400" class="rounded-xl" /></div>
       <div class="col-span-12 text-gray-700 lg:col-span-8">
         <p>
           Chúng tôi cam kết mang lại những sản phẩm chất lượng cao, thiết kế tinh tế và trải nghiệm tốt nhất cho khách

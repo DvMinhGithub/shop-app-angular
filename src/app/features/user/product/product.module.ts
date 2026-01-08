@@ -9,6 +9,8 @@ import { NzRadioModule } from 'ng-zorro-antd/radio'
 import { NzPaginationModule } from 'ng-zorro-antd/pagination'
 import { NzRateModule } from 'ng-zorro-antd/rate'
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton'
+import { NzTagModule } from 'ng-zorro-antd/tag'
+import { NzProgressModule } from 'ng-zorro-antd/progress'
 
 import { ProductRoutingModule } from './product-routing.module'
 import { ProductComponent } from './product.component'
@@ -29,6 +31,8 @@ import { SharedModule } from 'src/app/shared/share.module'
     NzPaginationModule,
     NzRateModule,
     NzSkeletonModule,
+    NzTagModule,
+    NzProgressModule,
     SharedModule
   ]
 })

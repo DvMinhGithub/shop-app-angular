@@ -1,18 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, Injector } from '@angular/core'
 import { finalize, Subject, takeUntil } from 'rxjs'
 import { ProductService } from './service/product.service'
 import { LoadingService } from 'src/app/shared/services/loading.service'
 import { IProduct } from './models/interface'
 import { MOCK_PRODUCTS } from './models/constant'
+import { ComponentBaseAbstract } from 'src/app/shared/abstract/component.base.abstract'
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>()
-
+export class ProductComponent extends ComponentBaseAbstract {
   // TAB
   tabs = ['All', 'New', 'Popular', 'Sale']
   selectedTab = 'All'
@@ -34,22 +33,30 @@ export class ProductComponent implements OnInit, OnDestroy {
   pageSize = 6
   total = 0
 
-  constructor(
-    private productService: ProductService,
-    private loadingService: LoadingService
-  ) {}
+  loadingFilter = true
+  loadingList = true
 
-  ngOnInit(): void {
+  constructor(
+    injector: Injector,
+    private productService: ProductService
+  ) {
+    super(injector)
+  }
+
+  protected override componentInit(): void {
+    this.loadFilter()
     this.getProduct()
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next()
-    this.destroy$.complete()
+  loadFilter() {
+    // fake delay
+    setTimeout(() => (this.loadingFilter = false), 300)
   }
 
   // ================= API + MOCK FALLBACK =================
   getProduct(): void {
+    this.loadingList = true
+
     const params = {
       page: this.pageIndex,
       size: this.pageSize,
@@ -59,13 +66,13 @@ export class ProductComponent implements OnInit, OnDestroy {
       priceMax: this.priceMax
     }
 
-    this.loadingService.show()
-
     this.productService
       .getProduct(params)
       .pipe(
-        takeUntil(this.destroy$),
-        finalize(() => this.loadingService.hide())
+        takeUntil(this.ngUnsubscribe),
+        finalize(() => {
+          ;(this.loadingService.hide(), (this.loadingList = false))
+        })
       )
       .subscribe({
         next: (res) => {
