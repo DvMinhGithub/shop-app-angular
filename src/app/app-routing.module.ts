@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'
+import { AdminGuardFn } from './core/guards/admin.guards'
+import { AuthGuardFn } from './core/guards/auth.guards'
 
 const routes: Routes = [
   {
@@ -31,6 +33,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate: [AdminGuardFn],
     loadChildren: () => import('./features/admin/admin.module').then((m) => m.AdminModule)
   }
 ]

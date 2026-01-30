@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core'
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router'
-import { IUser } from 'src/app/shared/models/user'
-import { TokenService } from '../services/token.service'
-import { UserService } from '../services/user.service'
+import { IUser } from '@shared/models/user'
+import { TokenService } from '@features/auth/services/token.service'
+import { UserService } from '@features/auth/services/user.service'
 
 
 @Injectable({

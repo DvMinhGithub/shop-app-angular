@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
-import { CartService } from 'src/app/core/services/cart.service'
-import { UserService } from 'src/app/core/services/user.service'
-import { IUser } from 'src/app/shared/models/user'
+import { CartService } from '@features/cart/services/cart.service'
+import { UserService } from '@features/auth/services/user.service'
+import { IUser } from '@shared/models/user'
 
 @Component({
   selector: 'app-header',
@@ -14,9 +14,8 @@ export class HeaderComponent implements OnInit {
   currentUser!: IUser | null
   menuItems = [
     { label: 'Trang Chủ', link: '/' },
-    { label: 'Giỏ Hàng', link: '/orders' },
-    { label: 'Dịch Vụ', link: '/services' },
-    { label: 'Liên Hệ', link: '/contact' }
+    { label: 'Giỏ Hàng', link: '/cart' },
+    { label: 'Đơn Hàng', link: '/orders' }
   ]
 
   constructor(public cartService: CartService, private userService: UserService) {}

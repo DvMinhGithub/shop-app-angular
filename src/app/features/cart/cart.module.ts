@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule, Routes } from '@angular/router'
 import { FormsModule } from '@angular/forms'
-import { SharedModule } from '../../shared/share.module'
-import { CartComponent } from './component/cart/cart.component'
+import { SharedModule } from '../../shared/shared.module'
+import { CartComponent } from './pages/cart/cart.component'
 
 const routes: Routes = [
   {

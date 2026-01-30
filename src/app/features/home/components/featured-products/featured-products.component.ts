@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
-import { ProductService } from 'src/app/core/services/product.service'
-import { IListProductsRequest, IProduct, IProductListResponse } from 'src/app/shared/models/product'
-import { IApiResponse } from 'src/app/shared/models/response'
+import { ProductService } from '@features/products/services/product.service'
+import { IListProductsRequest, IProduct, IProductListResponse } from '@shared/models/product'
+import { IApiResponse } from '@shared/models/response'
 
 interface Product {
   id: number

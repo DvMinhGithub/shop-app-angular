@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
-import { SharedModule } from '../../shared/share.module'
-import { OrderDetailComponent } from './components/order-detail/order-detail.component'
-import { OrderComponent } from './components/order-list/order.component'
+import { SharedModule } from '../../shared/shared.module'
+import { OrderDetailComponent } from './pages/order-detail/order-detail.component'
+import { OrderComponent } from './pages/order-list/order.component'
 import { ReactiveFormsModule } from '@angular/forms'
 import { FormsModule } from '@angular/forms'
 

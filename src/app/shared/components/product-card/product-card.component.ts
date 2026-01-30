@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
-import { CartService } from 'src/app/core/services/cart.service'
-import { IProduct } from 'src/app/shared/models/product'
+import { CartService } from '@features/cart/services/cart.service'
+import { IProduct } from '@shared/models/product'
 import { getProductImage } from '../../utils/product'
 
 @Component({

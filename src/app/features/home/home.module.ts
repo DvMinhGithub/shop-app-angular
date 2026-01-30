@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { SharedModule } from 'src/app/shared/share.module'
+import { SharedModule } from '@shared/shared.module'
 import { HeroBannerComponent } from './components/hero-banner/hero-banner.component'
 import { HomeComponent } from './pages/home.component'
 import { RouterModule } from '@angular/router';

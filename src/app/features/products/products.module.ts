@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 import { CarouselModule } from 'ngx-owl-carousel-o'
-import { SharedModule } from '../../shared/share.module'
-import { ProductDetailComponent } from './components/product-detail/product-detail.component'
+import { SharedModule } from '../../shared/shared.module'
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component'
 
 @NgModule({
   declarations: [ProductDetailComponent],

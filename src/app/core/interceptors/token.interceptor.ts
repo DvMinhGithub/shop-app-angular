@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TokenService } from '../services/token.service';
+import { TokenService } from '@features/auth/services/token.service';
 
 type ApiResponse<T = unknown> = T;
 
