@@ -1,13 +1,55 @@
 {
-  "tailwindConfig": "./tailwind.config.js",
+  "$schema": "http://json.schemastore.org/prettierrc",
   "singleQuote": true,
   "trailingComma": "none",
   "printWidth": 120,
-  "proseWrap": "never",
   "tabWidth": 2,
   "useTabs": false,
-  "bracketSpacing": true,
   "semi": false,
+  "bracketSpacing": true,
   "arrowParens": "always",
-  "bracketSameLine": false
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity": "css",
+  "bracketSameLine": false,
+  "proseWrap": "never",
+  "quoteProps": "as-needed",
+  "requirePragma": false,
+  "insertPragma": false,
+  "tailwindConfig": "./tailwind.config.js",
+  "tailwindFunctions": ["clsx", "cn", "classNames"],
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "overrides": [
+    {
+      "files": ["*.component.html", "*.template.html"],
+      "options": {
+        "parser": "angular",
+        "printWidth": 120,
+        "htmlWhitespaceSensitivity": "css"
+      }
+    },
+    {
+      "files": ["*.ts", "*.js", "*.tsx", "*.jsx"],
+      "options": {
+        "parser": "typescript"
+      }
+    },
+    {
+      "files": ["*.json", "*.jsonc"],
+      "options": {
+        "parser": "json"
+      }
+    },
+    {
+      "files": ["*.scss", "*.css"],
+      "options": {
+        "parser": "scss"
+      }
+    },
+    {
+      "files": ["*.md", "*.mdx"],
+      "options": {
+        "parser": "markdown"
+      }
+    }
+  ]
 }
