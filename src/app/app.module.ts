@@ -6,16 +6,11 @@ import { AppComponent } from './app.component'
 import { AppRoutingModule } from './app-routing.module'
 import { LayoutsModule } from './layouts/layouts.module'
 import { TokenInterceptor } from './core/interceptors/token.interceptor'
+import { NotFoundComponent } from './features/not-found/not-found.component'
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    LayoutsModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent, NotFoundComponent],
+  imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, LayoutsModule, AppRoutingModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

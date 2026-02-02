@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'
 import { AdminGuardFn } from './core/guards/admin.guards'
-import { AuthGuardFn } from './core/guards/auth.guards'
+import { NotFoundComponent } from './features/not-found/not-found.component'
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component'
 
 const routes: Routes = [
   {
@@ -28,6 +28,10 @@ const routes: Routes = [
       {
         path: 'auth',
         loadChildren: () => import('./features/auth/auth.module').then((m) => m.AuthModule)
+      },
+      {
+        path: '**',
+        component: NotFoundComponent
       }
     ]
   },
@@ -42,4 +46,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {} 
+export class AppRoutingModule {}
