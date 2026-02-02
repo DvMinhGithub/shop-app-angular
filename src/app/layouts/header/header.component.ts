@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { CartService } from '@features/cart/services/cart.service'
 import { UserService } from '@features/auth/services/user.service'
-import { IUser } from '@shared/models/user'
+import { CartService } from '@features/cart/services/cart.service'
 
 @Component({
   selector: 'app-header',
@@ -11,14 +10,17 @@ import { IUser } from '@shared/models/user'
 export class HeaderComponent implements OnInit {
   isMenuOpen = false
   orderCount = 0
-  currentUser!: IUser | null
+  currentUser = this.userService.currentUser
   menuItems = [
     { label: 'Trang Chủ', link: '/' },
     { label: 'Giỏ Hàng', link: '/cart' },
     { label: 'Đơn Hàng', link: '/orders' }
   ]
 
-  constructor(public cartService: CartService, private userService: UserService) {}
+  constructor(
+    public cartService: CartService,
+    private userService: UserService
+  ) {}
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen
@@ -31,11 +33,9 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.userService.logout()
-    this.currentUser = this.userService.getUser()
   }
 
   ngOnInit(): void {
     this.orderCount = this.cartService.getCart().size
-    this.currentUser = this.userService.getUser()
   }
 }
