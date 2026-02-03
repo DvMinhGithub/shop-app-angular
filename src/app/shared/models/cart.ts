@@ -6,4 +6,9 @@ export interface CartItem {
     image: string
   }
   quantity: number
-} 
+}
+
+export interface CartItemMergeRequest {
+  productId: number
+  quantity: number
+}
