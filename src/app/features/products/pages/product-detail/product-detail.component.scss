@@ -1,2 +1,4 @@
-@import "../../../../../../node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css";
-@import "../../../../../../node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css";
+:host ::ng-deep .thumbnail-carousel .thumb-item {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
