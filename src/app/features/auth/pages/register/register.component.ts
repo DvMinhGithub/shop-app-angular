@@ -5,7 +5,6 @@ import { UserService } from '@features/auth/services/user.service'
 import { IApiResponse } from '@shared/models/response'
 import { IRegisterRequest } from '@shared/models/user'
 
-
 type ValidationMessages = Record<string, Record<string, string>>
 
 @Component({
@@ -50,7 +49,11 @@ export class RegisterComponent {
     }
   }
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router
+  ) {
     this.registerForm = this.fb.group(
       {
         phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.pattern(/^[0-9]*$/)]],
@@ -102,9 +105,7 @@ export class RegisterComponent {
 
     this.userService.register(formData).subscribe({
       next: (res: IApiResponse<any>) => {
-        console.log('Registration response:', res);
-        
-        this.router.navigate(['/login'])
+        this.router.navigate(['auth/login'])
       },
       error: (error) => {
         console.error('Registration error:', error)
