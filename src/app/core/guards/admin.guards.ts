@@ -4,20 +4,23 @@ import { IUser } from '@shared/models/user'
 import { TokenService } from '@features/auth/services/token.service'
 import { UserService } from '@features/auth/services/user.service'
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class AdminGuard {
-  constructor(private router: Router, private tokenService: TokenService, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private tokenService: TokenService,
+    private userService: UserService
+  ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const user: IUser = this.userService.getUser()
-    if (user.role.name === 'ADMIN') {
+    const user: IUser | null = this.userService.getUser()
+    if (user?.role?.name === 'ADMIN') {
       return true
     }
 
-    this.router.navigate(['/login'])
+    this.router.navigate(['/auth/login'])
     return false
   }
 }
