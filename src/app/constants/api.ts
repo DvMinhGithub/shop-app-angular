@@ -51,3 +51,11 @@ export const orderDetailApi = {
   createOrderDetail: `${Url}/order-details`,
   getOrderDetail: (orderId: number): string => `${Url}/order-details/${orderId}`
 }
+
+export const cartApi = {
+  getCart: `${Url}/cart`,
+  addCart: `${Url}/cart`,
+  updateCart: `${Url}/cart`,
+  mergeCart: `${Url}/cart/merge`,
+  deleteCart: `${Url}/cart`
+}

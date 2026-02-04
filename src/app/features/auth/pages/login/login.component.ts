@@ -4,6 +4,7 @@ import { Router } from '@angular/router'
 import { finalize } from 'rxjs/operators'
 import { TokenService } from '@features/auth/services/token.service'
 import { UserService } from '@features/auth/services/user.service'
+import { CartService } from '@features/cart/services/cart.service'
 import { IApiResponse } from '@shared/models/response'
 import { IUser, ILoginRequest, ILoginResponse } from '@shared/models/user'
 
@@ -14,7 +15,6 @@ type ValidationMessages = Record<string, Record<string, string>>
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-
 export class LoginComponent {
   loginForm: FormGroup
   showPassword = false
@@ -38,6 +38,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private userService: UserService,
     private tokenService: TokenService,
+    private cartService: CartService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -64,8 +65,9 @@ export class LoginComponent {
       .subscribe({
         next: (res: IApiResponse<ILoginResponse>) => {
           this.tokenService.setToken(res.result.token)
-          this.router.navigate(['/'])
+          this.cartService.mergeCart()
           this.getUserDetails()
+          this.router.navigate(['/'])
         },
         error: (error) => {
           console.error('Login error:', error)
