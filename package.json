@@ -14,7 +14,7 @@
     "lint:fix": "ng lint --fix"
   },
   "lint-staged": {
-    "*.{ts,js}": ["prettier --write", "eslint --fix"],
+    "*.{ts,js}": ["prettier --write"],
     "*.{html,scss,css,json}": ["prettier --write"]
   },
   "private": true,

@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './assets/css/form.css';
+@import './assets/css/typography.css';
+
 .no-scroll {
   position: fixed;
   overflow-y: scroll;
@@ -14,7 +17,7 @@ body {
     scrollbar-gutter: stable;
     padding-right: 16px;
   }
-  
+
   @supports not (scrollbar-gutter: stable) {
     padding-right: calc(20px + (100vw - 100%));
   }
